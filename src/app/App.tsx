@@ -491,14 +491,6 @@ function ServicesSection() {
 
 // ── Footer ─────────────────────────────────────────────────────────────────
 function Footer() {
-  const { t } = useT();
-  const links = [
-    { label: t.footer_home, id: "hero" },
-    { label: t.footer_services, id: "services" },
-    { label: t.footer_about, id: "about" },
-    { label: t.footer_contact, id: "contact" },
-  ];
-
   return (
     <footer className="w-full bg-[#dbd6c3] border-t border-[rgba(26,26,24,0.15)] h-[80px]">
       <div className="max-w-[1280px] mx-auto h-full flex items-center justify-between px-8 pr-12">
@@ -506,24 +498,10 @@ function Footer() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           onClick={() => scrollTo("hero")}
-          className="h-[46px] w-[46px] rounded-[2px] overflow-hidden flex-shrink-0 cursor-pointer"
+          className="h-[80px] w-[78px] rounded-[2px] overflow-hidden flex-shrink-0 cursor-pointer"
         >
           <img src={imgLogo} alt="LESISU Studio" className="w-full h-full object-cover" />
         </motion.button>
-
-        <div className="flex items-center gap-8">
-          {links.map((item) => (
-            <motion.button
-              key={item.id}
-              onClick={() => scrollTo(item.id)}
-              whileHover={{ color: "#1a1a18" }}
-              className="text-[rgba(26,26,24,0.4)] text-[10px] tracking-[1.4px] uppercase transition-colors duration-200 cursor-pointer"
-              style={{ fontFamily: "'DM Mono', monospace" }}
-            >
-              {item.label}
-            </motion.button>
-          ))}
-        </div>
 
         <p
           className="text-[rgba(26,26,24,0.35)] text-[10px] tracking-[1.2px]"
