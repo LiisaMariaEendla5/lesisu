@@ -1,9 +1,101 @@
 import { motion, useInView, AnimatePresence } from "motion/react";
-import { useRef, useState } from "react";
+import { useRef, useState, createContext, useContext } from "react";
 import imgLesisuStudio from "figma:asset/3ecb6bee002a445a06f7b073134159c613f21f7e.png";
 import imgLogo from "figma:asset/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgPortfolio from "figma:asset/89e932ef73814d628bef260faf2bbf0177efee97.png";
 import svgPaths from "../imports/UserDashboard/svg-qbu93pp18k";
+
+const translations = {
+  EN: {
+    tagline: "Web development & Marketing",
+    hero_title: "DIGITAL PRODUCT",
+    hero_italic: "studio",
+    hero_sub: "Web Development and Marketing Services",
+    hero_cta: "Let's work together",
+    certifications: "Certifications",
+    services: "SERVICES",
+    svc1_title: "Web Development",
+    svc1_desc: "From design handoff to deployed product. Building fast, accessible, and maintainable web experiences.",
+    svc2_title: "Product & UX Design",
+    svc2_desc: "Research-driven design from discovery to hi-fi prototypes. Wireframing, user flows, and pixel-perfect Figma deliverables.",
+    svc3_title: "Digital Marketing",
+    svc3_desc: "Strategic campaigns that connect brand to audience. Data-led planning, performance analytics, and creative execution.",
+    studio_label: "Studio",
+    about_title: "About LESISU Studio",
+    about_body: "LESISU Studio is a small creative studio that blends business thinking with intentional design. Building digital products and brand identities that are user-friendly, and visually memorable.",
+    about_founded: "Founded in 2026 by Liisa-Maria Eendla.",
+    portfolio: "PORTFOLIO",
+    work1_cat: "App Development & UX Design",
+    work2_cat: "Social Media",
+    contact_title: "Let's work together",
+    contact_text1: "Have a project in mind? I'd love to hear about it.",
+    contact_text2: "Fill in the form or reach me directly at",
+    contact_location: "Tallinn, Estonia · Available for remote projects worldwide",
+    form_name: "Name",
+    form_email: "Email",
+    form_message: "Type your message here",
+    form_send: "Send message",
+    form_sent: "Message sent ✓",
+    nav_services: "SERVICES",
+    nav_about: "ABOUT",
+    nav_portfolio: "PORTFOLIO",
+    nav_contact: "CONTACT",
+    footer_home: "Home",
+    footer_services: "Services",
+    footer_about: "About",
+    footer_contact: "Contact",
+  },
+  ET: {
+    tagline: "Veebiarendus & turundus",
+    hero_title: "DIGITAALNE TOODE",
+    hero_italic: "stuudio",
+    hero_sub: "Veebiarenduse ja turunduse teenused",
+    hero_cta: "Teeme koostööd",
+    certifications: "Sertifikaadid",
+    services: "TEENUSED",
+    svc1_title: "Veebiarendus",
+    svc1_desc: "Disainist kuni valmis tooteni. Loome kiireid, ligipääsetavaid ja hooldatavaid veebikeskkondi.",
+    svc2_title: "Toote- ja UX-disain",
+    svc2_desc: "Uuringupõhine disain avastamisest kuni hi-fi prototüüpideni. Raamistikud, kasutajavood ja pikslitäpsed Figma materjalid.",
+    svc3_title: "Digitaalturundus",
+    svc3_desc: "Strateegilised kampaaniad, mis ühendavad brändi sihtgrupiga. Andmepõhine planeerimine, tulemusanalüütika ja loominguline teostus.",
+    studio_label: "Stuudio",
+    about_title: "LESISU Stuudio kohta",
+    about_body: "LESISU Stuudio on väike loomestuudio, mis ühendab ärimõtlemist teadliku disainiga. Loome digitaalseid tooteid ja brändide identiteete, mis on kasutajasõbralikud ja visuaalselt meeldejäävad.",
+    about_founded: "Asutatud 2026. aastal Liisa-Maria Eendla poolt.",
+    portfolio: "PORTFOOLIO",
+    work1_cat: "Rakenduse arendus & UX disain",
+    work2_cat: "Sotsiaalmeedia",
+    contact_title: "Teeme koostööd",
+    contact_text1: "Kas sul on projekt plaanis? Räägi mulle sellest.",
+    contact_text2: "Täida vorm või võta minuga otse ühendust:",
+    contact_location: "Tallinn, Eesti · Saadaval kaugprojektideks üle maailma",
+    form_name: "Nimi",
+    form_email: "E-post",
+    form_message: "Kirjuta oma sõnum siia",
+    form_send: "Saada sõnum",
+    form_sent: "Sõnum saadetud ✓",
+    nav_services: "TEENUSED",
+    nav_about: "MEIST",
+    nav_portfolio: "PORTFOOLIO",
+    nav_contact: "KONTAKT",
+    footer_home: "Avaleht",
+    footer_services: "Teenused",
+    footer_about: "Meist",
+    footer_contact: "Kontakt",
+  },
+};
+
+type Lang = "EN" | "ET";
+type T = typeof translations["EN"];
+
+const LangContext = createContext<{ lang: Lang; t: T; setLang: (l: Lang) => void }>({
+  lang: "EN",
+  t: translations.EN,
+  setLang: () => {},
+});
+
+const useT = () => useContext(LangContext);
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -19,7 +111,7 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
-// ── LinkedIn SVG (replaces Instagram) ──────────────────────────────────────
+// ── LinkedIn SVG ───────────────────────────────────────────────────────────
 function LinkedInIcon({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +120,7 @@ function LinkedInIcon({ className = "" }: { className?: string }) {
   );
 }
 
-// ── Meta logo (certifications) ─────────────────────────────────────────────
+// ── Meta logo ──────────────────────────────────────────────────────────────
 function MetaLogo() {
   return (
     <div className="relative size-[57px]">
@@ -61,7 +153,7 @@ function MetaLogo() {
   );
 }
 
-// ── Google logo (certifications) ───────────────────────────────────────────
+// ── Google logo ────────────────────────────────────────────────────────────
 function GoogleLogo() {
   return (
     <div className="relative size-[42px]">
@@ -91,14 +183,14 @@ function GoogleLogo() {
 
 // ── Navigation ─────────────────────────────────────────────────────────────
 function Nav() {
+  const { lang, t, setLang } = useT();
   const [active, setActive] = useState("hero");
-  const [lang, setLang] = useState<"EN" | "ET">("EN");
 
   const navItems = [
-    { label: "SERVICES", id: "services" },
-    { label: "ABOUT", id: "about" },
-    { label: "PORTFOLIO", id: "portfolio" },
-    { label: "CONTACT", id: "contact" },
+    { label: t.nav_services, id: "services" },
+    { label: t.nav_about, id: "about" },
+    { label: t.nav_portfolio, id: "portfolio" },
+    { label: t.nav_contact, id: "contact" },
   ];
 
   const handleNav = (id: string) => {
@@ -115,7 +207,6 @@ function Nav() {
       style={{ boxShadow: "0px 1px 1.5px rgba(0,0,0,0.1), 0px 1px 1px rgba(0,0,0,0.1)" }}
     >
       <div className="max-w-[1280px] mx-auto h-[72px] flex items-center justify-between px-8 pr-12">
-        {/* Logo */}
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
@@ -125,7 +216,6 @@ function Nav() {
           <img src={imgLogo} alt="LESISU Studio" className="w-full h-full object-cover" />
         </motion.button>
 
-        {/* Nav links */}
         <div className="flex items-center gap-8">
           {navItems.map((item) => (
             <motion.button
@@ -154,7 +244,6 @@ function Nav() {
             </motion.button>
           ))}
 
-          {/* Divider */}
           <div className="w-px h-[14px] bg-[rgba(26,26,24,0.18)]" />
 
           {/* Language switcher */}
@@ -196,19 +285,19 @@ function Nav() {
 
 // ── Hero Section ───────────────────────────────────────────────────────────
 function HeroSection() {
+  const { t } = useT();
   return (
     <section id="hero" className="w-full bg-[#a69c8a] pt-[72px]">
       <div className="bg-[#a69c8a] max-w-[1280px] mx-auto flex items-center gap-12 px-8 py-16 min-h-[630px]">
-        {/* Left */}
         <div className="flex-1 max-w-[540px] flex flex-col">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.55 }}
-            className="text-[#a69c8a] text-[13px] tracking-[1.5px] uppercase mb-6"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, color: "rgba(166,156,138,1)" }}
+            className="text-[13px] tracking-[1.5px] uppercase mb-6"
+            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, color: "#f5f0e8" }}
           >
-            <span style={{ color: "#f5f0e8" }}>Web development &amp; Marketing</span>
+            {t.tagline}
           </motion.p>
 
           <motion.h1
@@ -222,8 +311,8 @@ function HeroSection() {
               fontSize: "clamp(44px, 5.5vw, 67.74px)",
             }}
           >
-            DIGITAL PRODUCT{" "}
-            <em style={{ fontStyle: "italic" }}>studio</em>
+            {t.hero_title}{" "}
+            <em style={{ fontStyle: "italic" }}>{t.hero_italic}</em>
           </motion.h1>
 
           <motion.p
@@ -233,7 +322,7 @@ function HeroSection() {
             className="text-[rgba(26,26,24,0.65)] text-[17px] leading-[1.7] mb-10 max-w-[500px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}
           >
-            Web Development and Marketing Services
+            {t.hero_sub}
           </motion.p>
 
           <motion.button
@@ -246,11 +335,10 @@ function HeroSection() {
             className="bg-[#dbd6c3] h-[54px] px-8 rounded-[8px] text-[rgba(26,26,24,0.66)] text-[15px] tracking-[1px] uppercase cursor-pointer transition-colors duration-200 self-start min-w-[272px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
           >
-            Let&apos;s work together
+            {t.hero_cta}
           </motion.button>
         </div>
 
-        {/* Right: studio image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.93 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -266,6 +354,7 @@ function HeroSection() {
 
 // ── Certifications ─────────────────────────────────────────────────────────
 function CertificationsSection() {
+  const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -279,10 +368,9 @@ function CertificationsSection() {
           className="text-[#a69c8a] text-[12px] tracking-[0] uppercase min-w-[120px]"
           style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
         >
-          Certifications
+          {t.certifications}
         </p>
 
-        {/* Meta cert */}
         <motion.a
           href="https://www.coursera.org/account/accomplishments"
           target="_blank"
@@ -306,7 +394,6 @@ function CertificationsSection() {
           </div>
         </motion.a>
 
-        {/* Google cert */}
         <motion.a
           href="https://www.coursera.org/account/accomplishments"
           target="_blank"
@@ -336,25 +423,14 @@ function CertificationsSection() {
 
 // ── Services Section ───────────────────────────────────────────────────────
 function ServicesSection() {
+  const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const services = [
-    {
-      num: "01",
-      title: "Web Development",
-      desc: "From design handoff to deployed product. Building fast, accessible, and maintainable web experiences.",
-    },
-    {
-      num: "02",
-      title: "Product & UX Design",
-      desc: "Research-driven design from discovery to hi-fi prototypes. Wireframing, user flows, and pixel-perfect Figma deliverables.",
-    },
-    {
-      num: "03",
-      title: "Digital Marketing",
-      desc: "Strategic campaigns that connect brand to audience. Data-led planning, performance analytics, and creative execution.",
-    },
+    { num: "01", title: t.svc1_title, desc: t.svc1_desc },
+    { num: "02", title: t.svc2_title, desc: t.svc2_desc },
+    { num: "03", title: t.svc3_title, desc: t.svc3_desc },
   ];
 
   return (
@@ -367,7 +443,7 @@ function ServicesSection() {
           className="text-[#1a1a18] text-[45px] tracking-[0.5px] uppercase text-center mb-16"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
         >
-          SERVICES
+          {t.services}
         </motion.h2>
 
         <motion.div
@@ -415,11 +491,12 @@ function ServicesSection() {
 
 // ── Footer ─────────────────────────────────────────────────────────────────
 function Footer() {
+  const { t } = useT();
   const links = [
-    { label: "Home", id: "hero" },
-    { label: "Services", id: "services" },
-    { label: "About", id: "about" },
-    { label: "Contact", id: "contact" },
+    { label: t.footer_home, id: "hero" },
+    { label: t.footer_services, id: "services" },
+    { label: t.footer_about, id: "about" },
+    { label: t.footer_contact, id: "contact" },
   ];
 
   return (
@@ -461,6 +538,7 @@ function Footer() {
 
 // ── About Section ──────────────────────────────────────────────────────────
 function AboutSection() {
+  const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -474,7 +552,7 @@ function AboutSection() {
           className="text-[#f5f0e8] text-[13px] tracking-[1px] uppercase mb-16"
           style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
         >
-          Studio
+          {t.studio_label}
         </motion.p>
 
         <motion.h2
@@ -484,7 +562,7 @@ function AboutSection() {
           className="text-[#ede8df] text-[64px] tracking-[0.79px] uppercase text-center mb-12 leading-none"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
         >
-          About LESISU Studio
+          {t.about_title}
         </motion.h2>
 
         <motion.div
@@ -497,14 +575,14 @@ function AboutSection() {
             className="text-[#fafaf7] text-[24px] leading-[1.15]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
           >
-            LESISU Studio is a small creative studio that blends business thinking with intentional design. Building digital products and brand identities that are user-friendly, and visually memorable.
+            {t.about_body}
           </p>
           <br />
           <p
             className="text-[#fafaf7] text-[20px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontStyle: "italic" }}
           >
-            Founded in 2026 by Liisa-Maria Eendla.
+            {t.about_founded}
           </p>
         </motion.div>
       </div>
@@ -514,12 +592,13 @@ function AboutSection() {
 
 // ── Portfolio Section ──────────────────────────────────────────────────────
 function PortfolioSection() {
+  const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const projects = [
-    { category: "App Development & UX Design", title: "RENTIIK" },
-    { category: "Social Media", title: "SAMM KORRAGA" },
+    { category: t.work1_cat, title: "RENTIIK" },
+    { category: t.work2_cat, title: "SAMM KORRAGA" },
   ];
 
   return (
@@ -532,7 +611,7 @@ function PortfolioSection() {
           className="text-[#1a1a18] text-[45px] tracking-[0.5px] uppercase text-center mb-16"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
         >
-          PORTFOLIO
+          {t.portfolio}
         </motion.h2>
 
         <motion.div
@@ -581,6 +660,7 @@ function PortfolioSection() {
 
 // ── Contact Section ────────────────────────────────────────────────────────
 function ContactSection() {
+  const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -596,7 +676,6 @@ function ContactSection() {
   return (
     <section id="contact" ref={ref} className="w-full bg-[#a59c8c] py-20 px-8">
       <div className="max-w-[1280px] mx-auto flex gap-16 items-start flex-wrap">
-        {/* Left column */}
         <motion.div
           initial={{ opacity: 0, x: -28 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -607,7 +686,7 @@ function ContactSection() {
             className="text-[#1a1a18] text-[56px] tracking-[-0.5px] uppercase leading-none w-[501px]"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
           >
-            Let&apos;s work together
+            {t.contact_title}
           </h2>
 
           <div className="max-w-[360px]">
@@ -615,10 +694,10 @@ function ContactSection() {
               className="text-[#fafaf7] text-[24px] leading-[1.2] mb-2"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
-              Have a project in mind? I&apos;d love to hear about it.
+              {t.contact_text1}
             </p>
             <p className="text-[#fafaf7] text-[17px] leading-[1.7]" style={{ fontFamily: "Inter, sans-serif" }}>
-              Fill in the form or reach me directly at{" "}
+              {t.contact_text2}{" "}
               <motion.a
                 href="mailto:eendlaliisamaria@gmail.com"
                 whileHover={{ opacity: 0.75 }}
@@ -630,7 +709,6 @@ function ContactSection() {
             </p>
           </div>
 
-          {/* LinkedIn link + studio image */}
           <div className="flex items-center gap-5 pt-2">
             <motion.a
               href="https://www.linkedin.com/in/liisa-maria-eendla"
@@ -652,11 +730,10 @@ function ContactSection() {
             className="text-[#fafaf7] text-[13px] leading-[1.5]"
             style={{ fontFamily: "Barlow, sans-serif", fontWeight: 400 }}
           >
-            Tallinn, Estonia · Available for remote projects worldwide
+            {t.contact_location}
           </p>
         </motion.div>
 
-        {/* Right column: form */}
         <motion.form
           initial={{ opacity: 0, x: 28 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -666,7 +743,7 @@ function ContactSection() {
         >
           <motion.input
             type="text"
-            placeholder="Name"
+            placeholder={t.form_name}
             required
             value={form.name}
             onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
@@ -676,7 +753,7 @@ function ContactSection() {
           />
           <motion.input
             type="email"
-            placeholder="Email"
+            placeholder={t.form_email}
             required
             value={form.email}
             onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
@@ -685,7 +762,7 @@ function ContactSection() {
             style={{ fontFamily: "Inter, sans-serif" }}
           />
           <motion.textarea
-            placeholder="Type your message here"
+            placeholder={t.form_message}
             required
             value={form.message}
             onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
@@ -705,7 +782,7 @@ function ContactSection() {
                   className="bg-[#1a1a18] text-[#fafaf7] h-[62px] rounded-[4px] flex items-center justify-center text-[15px] tracking-[1px] uppercase"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
                 >
-                  Message sent ✓
+                  {t.form_sent}
                 </motion.div>
               ) : (
                 <motion.button
@@ -718,7 +795,7 @@ function ContactSection() {
                   className="bg-[#1a1a18] text-[#fafaf7] px-10 py-5 rounded-[4px] text-[15px] tracking-[1px] uppercase cursor-pointer"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
                 >
-                  Send message
+                  {t.form_send}
                 </motion.button>
               )}
             </AnimatePresence>
@@ -731,16 +808,21 @@ function ContactSection() {
 
 // ── App ────────────────────────────────────────────────────────────────────
 export default function App() {
+  const [lang, setLang] = useState<Lang>("EN");
+  const t = translations[lang];
+
   return (
-    <div className="min-h-screen bg-[#fafaf7]">
-      <Nav />
-      <HeroSection />
-      <CertificationsSection />
-      <ServicesSection />
-      <AboutSection />
-      <PortfolioSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <LangContext.Provider value={{ lang, t, setLang }}>
+      <div className="min-h-screen bg-[#fafaf7]">
+        <Nav />
+        <HeroSection />
+        <CertificationsSection />
+        <ServicesSection />
+        <AboutSection />
+        <PortfolioSection />
+        <ContactSection />
+        <Footer />
+      </div>
+    </LangContext.Provider>
   );
 }
