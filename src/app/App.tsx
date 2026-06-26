@@ -329,10 +329,11 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.55 }}
-            whileHover={{ scale: 1.03, backgroundColor: "#ccc8b0" }}
+            whileHover={{ backgroundColor: "#fafaf7", color: "#1a1a18" }}
             whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             onClick={() => scrollTo("contact")}
-            className="bg-[#dbd6c3] h-[54px] px-8 rounded-[8px] text-[rgba(26,26,24,0.66)] text-[15px] tracking-[1px] uppercase cursor-pointer transition-colors duration-200 self-start min-w-[272px]"
+            className="bg-[#1a1a18] h-[54px] px-8 rounded-[8px] text-[#fafaf7] text-[15px] tracking-[1px] uppercase cursor-pointer self-start min-w-[272px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
           >
             {t.hero_cta}
