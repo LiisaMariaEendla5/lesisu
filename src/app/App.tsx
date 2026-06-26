@@ -47,7 +47,7 @@ const translations = {
   },
   ET: {
     tagline: "Veebiarendus & turundus",
-    hero_title: "DIGITAALNE TOODE",
+    hero_title: "DIGITOOTE",
     hero_italic: "stuudio",
     hero_sub: "Veebiarenduse ja turunduse teenused",
     hero_cta: "Teeme koostööd",
