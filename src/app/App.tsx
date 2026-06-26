@@ -185,6 +185,7 @@ function GoogleLogo() {
 function Nav() {
   const { lang, t, setLang } = useT();
   const [active, setActive] = useState("hero");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
     { label: t.nav_services, id: "services" },
@@ -196,6 +197,7 @@ function Nav() {
   const handleNav = (id: string) => {
     setActive(id);
     scrollTo(id);
+    setMenuOpen(false);
   };
 
   return (
@@ -206,7 +208,7 @@ function Nav() {
       className="fixed top-0 left-0 right-0 z-50 bg-[#dbd6c3] border-b border-[rgba(26,26,24,0.08)]"
       style={{ boxShadow: "0px 1px 1.5px rgba(0,0,0,0.1), 0px 1px 1px rgba(0,0,0,0.1)" }}
     >
-      <div className="max-w-[1280px] mx-auto h-[72px] flex items-center justify-between px-8 pr-12">
+      <div className="nav-container max-w-[1280px] mx-auto h-[72px] flex items-center justify-between px-8 pr-12">
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
@@ -216,7 +218,8 @@ function Nav() {
           <img src={imgLogo} alt="LESISU Studio" className="w-full h-full object-cover" />
         </motion.button>
 
-        <div className="flex items-center gap-8">
+        {/* Desktop nav links */}
+        <div className="nav-links flex items-center gap-8">
           {navItems.map((item) => (
             <motion.button
               key={item.id}
@@ -278,7 +281,44 @@ function Nav() {
             ))}
           </div>
         </div>
+
+        {/* Hamburger button — hidden on desktop via mobile.css */}
+        <button
+          className="hamburger-btn"
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <div className="mobile-nav-open">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleNav(item.id)}
+              className={`mobile-nav-item${active === item.id ? " active" : ""}`}
+            >
+              {item.label}
+            </button>
+          ))}
+          <div className="mobile-lang-row">
+            {(["ET", "EN"] as const).map((l, i) => (
+              <span key={l} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                {i > 0 && <span className="mobile-lang-sep">|</span>}
+                <button
+                  onClick={() => setLang(l)}
+                  className={`mobile-lang-btn${lang === l ? " active" : ""}`}
+                >
+                  {l}
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </motion.nav>
   );
 }
@@ -288,8 +328,8 @@ function HeroSection() {
   const { t } = useT();
   return (
     <section id="hero" className="w-full bg-[#a69c8a] pt-[72px]" style={{ scrollMarginTop: "72px" }}>
-      <div className="bg-[#a69c8a] max-w-[1280px] mx-auto flex items-center gap-12 px-8 py-16 min-h-[630px]">
-        <div className="flex-1 max-w-[540px] flex flex-col">
+      <div className="hero-inner bg-[#a69c8a] max-w-[1280px] mx-auto flex items-center gap-12 px-8 py-16 min-h-[630px]">
+        <div className="hero-text flex-1 max-w-[540px] flex flex-col">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -333,7 +373,7 @@ function HeroSection() {
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
             onClick={() => scrollTo("contact")}
-            className="bg-[#1a1a18] h-[54px] px-8 rounded-[8px] text-[#fafaf7] text-[15px] tracking-[1px] uppercase cursor-pointer self-start min-w-[272px]"
+            className="hero-cta bg-[#1a1a18] h-[54px] px-8 rounded-[8px] text-[#fafaf7] text-[15px] tracking-[1px] uppercase cursor-pointer self-start min-w-[272px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
           >
             {t.hero_cta}
@@ -344,7 +384,7 @@ function HeroSection() {
           initial={{ opacity: 0, scale: 0.93 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.75, ease: "easeOut" }}
-          className="flex-shrink-0 size-[506px] overflow-hidden"
+          className="hero-image flex-shrink-0 size-[506px] overflow-hidden"
         >
           <img src={imgLesisuStudio} alt="LESISU Studio" className="w-full h-full object-cover" />
         </motion.div>
@@ -364,7 +404,7 @@ function CertificationsSection() {
       ref={ref}
       className="w-full bg-[#fafaf7] border-t-2 border-b-2 border-[rgba(26,26,24,0.08)] py-10"
     >
-      <div className="max-w-[1280px] mx-auto px-8 flex items-stretch gap-8 flex-wrap">
+      <div className="certs-container max-w-[1280px] mx-auto px-8 flex items-stretch gap-8 flex-wrap">
         <p
           className="text-[#a69c8a] text-[12px] tracking-[0] uppercase min-w-[120px]"
           style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
@@ -452,7 +492,7 @@ function ServicesSection() {
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-3 gap-0"
+          className="services-grid grid grid-cols-3 gap-0"
         >
           {services.map((s) => (
             <motion.div
@@ -548,7 +588,7 @@ function AboutSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, delay: 0.25 }}
-          className="max-w-[1015px]"
+          className="about-body-text max-w-[1015px]"
         >
           <p
             className="text-[#fafaf7] text-[24px] leading-[1.15]"
@@ -597,7 +637,7 @@ function PortfolioSection() {
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="flex gap-8 flex-wrap justify-center"
+          className="portfolio-cards flex gap-8 flex-wrap justify-center"
         >
           {projects.map((p) => (
             <motion.div
@@ -606,7 +646,7 @@ function PortfolioSection() {
               whileHover={{ y: -6 }}
               className="flex flex-col gap-5 cursor-pointer group"
             >
-              <div className="size-[334px] rounded-[8px] overflow-hidden">
+              <div className="portfolio-img size-[334px] rounded-[8px] overflow-hidden">
                 <motion.img
                   src={imgPortfolio}
                   alt={p.title}
@@ -654,15 +694,15 @@ function ContactSection() {
 
   return (
     <section id="contact" ref={ref} className="w-full bg-[#a59c8c] py-20 px-8" style={{ scrollMarginTop: "72px" }}>
-      <div className="max-w-[1280px] mx-auto flex gap-16 items-start flex-wrap">
+      <div className="contact-inner max-w-[1280px] mx-auto flex gap-16 items-start flex-wrap">
         <motion.div
           initial={{ opacity: 0, x: -28 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="flex-1 min-w-[340px] flex flex-col gap-6 pt-2"
+          className="contact-col flex-1 min-w-[340px] flex flex-col gap-6 pt-2"
         >
           <h2
-            className="text-[#1a1a18] text-[56px] tracking-[-0.5px] uppercase leading-none w-[501px]"
+            className="contact-heading text-[#1a1a18] text-[56px] tracking-[-0.5px] uppercase leading-none w-[501px]"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
           >
             {t.contact_title}
@@ -718,7 +758,7 @@ function ContactSection() {
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
           onSubmit={handleSubmit}
-          className="flex-1 min-w-[340px] max-w-[540px] flex flex-col gap-4"
+          className="contact-col flex-1 min-w-[340px] max-w-[540px] flex flex-col gap-4"
         >
           <motion.input
             type="text"
