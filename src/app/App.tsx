@@ -737,10 +737,10 @@ export default function App() {
       <HeroSection />
       <CertificationsSection />
       <ServicesSection />
-      <Footer />
       <AboutSection />
       <PortfolioSection />
       <ContactSection />
+      <Footer />
     </div>
   );
 }
