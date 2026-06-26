@@ -287,7 +287,7 @@ function Nav() {
 function HeroSection() {
   const { t } = useT();
   return (
-    <section id="hero" className="w-full bg-[#a69c8a] pt-[72px]">
+    <section id="hero" className="w-full bg-[#a69c8a] pt-[72px]" style={{ scrollMarginTop: "72px" }}>
       <div className="bg-[#a69c8a] max-w-[1280px] mx-auto flex items-center gap-12 px-8 py-16 min-h-[630px]">
         <div className="flex-1 max-w-[540px] flex flex-col">
           <motion.p
@@ -363,7 +363,7 @@ function CertificationsSection() {
       ref={ref}
       className="w-full bg-[#fafaf7] border-t-2 border-b-2 border-[rgba(26,26,24,0.08)] py-10"
     >
-      <div className="max-w-[1280px] mx-auto px-8 flex items-center gap-8 flex-wrap">
+      <div className="max-w-[1280px] mx-auto px-8 flex items-stretch gap-8 flex-wrap">
         <p
           className="text-[#a69c8a] text-[12px] tracking-[0] uppercase min-w-[120px]"
           style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
@@ -434,7 +434,7 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="w-full bg-[#fafaf7] border-t border-[#dbd6c3] py-24">
+    <section id="services" className="w-full bg-[#fafaf7] border-t border-[#dbd6c3] py-24" style={{ scrollMarginTop: "72px" }}>
       <div className="max-w-[1280px] mx-auto px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -543,7 +543,7 @@ function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" ref={ref} className="w-full bg-[#a69c8a] py-16 px-12 min-h-[573px]">
+    <section id="about" ref={ref} className="w-full bg-[#a69c8a] py-16 px-12 min-h-[573px]" style={{ scrollMarginTop: "72px" }}>
       <div className="max-w-[1280px] mx-auto">
         <motion.p
           initial={{ opacity: 0 }}
@@ -602,7 +602,7 @@ function PortfolioSection() {
   ];
 
   return (
-    <section id="portfolio" ref={ref} className="w-full bg-white py-24 px-8">
+    <section id="portfolio" ref={ref} className="w-full bg-white py-24 px-8" style={{ scrollMarginTop: "72px" }}>
       <div className="max-w-[1280px] mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -674,7 +674,7 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={ref} className="w-full bg-[#a59c8c] py-20 px-8">
+    <section id="contact" ref={ref} className="w-full bg-[#a59c8c] py-20 px-8" style={{ scrollMarginTop: "72px" }}>
       <div className="max-w-[1280px] mx-auto flex gap-16 items-start flex-wrap">
         <motion.div
           initial={{ opacity: 0, x: -28 }}
