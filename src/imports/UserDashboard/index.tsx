@@ -1,25 +1,112 @@
+import { useState, createContext, useContext } from "react";
 import svgPaths from "./svg-qbu93pp18k";
 import imgLesisuStudio23 from "./3ecb6bee002a445a06f7b073134159c613f21f7e.png";
 import imgContainer from "./d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgImageBrandIdentity from "./89e932ef73814d628bef260faf2bbf0177efee97.png";
 
+const translations = {
+  en: {
+    tagline: "Web development & Marketing",
+    hero_title1: "DIGITAL PRODUCT ",
+    hero_title2: "studio",
+    hero_subtitle: "Web Development and Marketing Services",
+    hero_cta: "Let's work together",
+    certifications: "Certifications",
+    services_heading: "SERVICES",
+    web_dev: "Web Development",
+    web_dev_desc: "From design handoff to deployed product. Building fast, accessible, and maintainable web experiences.",
+    product_design: "Product & UX Design",
+    product_design_desc: "Research-driven design from discovery to hi-fi prototypes. Wireframing, user flows, and pixel-perfect Figma deliverables.",
+    digital_marketing: "Digital Marketing",
+    digital_marketing_desc: "Strategic campaigns that connect brand to audience. Data-led planning, performance analytics, and creative execution.",
+    nav_home: "Home",
+    nav_services: "Services",
+    nav_about: "About",
+    nav_contact: "Contact",
+    nav_portfolio: "Portfolio",
+    studio_label: "Studio",
+    about_title: "About LESISU Studio",
+    about_text: "LESISU Studio is a small creative studio that blends business thinking with intentional design. Building digital products and brand identities that are user-friendly, and visually memorable. ",
+    about_founded: "Founded in 2026 by Liisa-Maria Eendla.",
+    portfolio: "portfolio",
+    work_tag1: "App dEVELOPMENT & ux design",
+    work_tag2: "SOCIAL MEDIA",
+    contact_title: "Let's work together",
+    contact_text1: "Have a project in mind? I'd love to hear about it. ",
+    contact_text2: "Fill in the form or reach me directly at ",
+    contact_location: "Tallinn, Estonia · Available for remote projects worldwide",
+    form_name: "Name",
+    form_email: "Email",
+    form_message: "Type your message here",
+    form_send: "Send message",
+  },
+  et: {
+    tagline: "Veebiarendus & turundus",
+    hero_title1: "DIGITAALNE TOODE ",
+    hero_title2: "stuudio",
+    hero_subtitle: "Veebiarenduse ja turunduse teenused",
+    hero_cta: "Teeme koostööd",
+    certifications: "Sertifikaadid",
+    services_heading: "TEENUSED",
+    web_dev: "Veebiarendus",
+    web_dev_desc: "Disainist kuni valmis tooteni. Loome kiireid, ligipääsetavaid ja hooldatavaid veebikeskkondi.",
+    product_design: "Toote- ja UX-disain",
+    product_design_desc: "Uuringupõhine disain avastamisest kuni hi-fi prototüüpideni. Raamistikud, kasutajavood ja pikslitäpsed Figma materjalid.",
+    digital_marketing: "Digitaalturundus",
+    digital_marketing_desc: "Strateegilised kampaaniad, mis ühendavad brändi sihtgrupiga. Andmepõhine planeerimine, tulemusanalüütika ja loominguline teostus.",
+    nav_home: "Avaleht",
+    nav_services: "Teenused",
+    nav_about: "Meist",
+    nav_contact: "Kontakt",
+    nav_portfolio: "Portfoolio",
+    studio_label: "Stuudio",
+    about_title: "LESISU Stuudio kohta",
+    about_text: "LESISU Stuudio on väike loomestuudio, mis ühendab ärimõtlemist teadliku disainiga. Loome digitaalseid tooteid ja brändide identiteete, mis on kasutajasõbralikud ja visuaalselt meeldejäävad. ",
+    about_founded: "Asutatud 2026. aastal Liisa-Maria Eendla poolt.",
+    portfolio: "portfoolio",
+    work_tag1: "RAKENDUSE ARENDUS & UX DISAIN",
+    work_tag2: "SOTSIAALMEEDIA",
+    contact_title: "Teeme koostööd",
+    contact_text1: "Kas sul on projekt plaanis? Räägi mulle sellest. ",
+    contact_text2: "Täida vorm või võta minuga otse ühendust: ",
+    contact_location: "Tallinn, Eesti · Saadaval kaugprojektideks üle maailma",
+    form_name: "Nimi",
+    form_email: "E-post",
+    form_message: "Kirjuta oma sõnum siia",
+    form_send: "Saada sõnum",
+  },
+};
+
+type Language = "en" | "et";
+type Translations = typeof translations["en"];
+
+const LanguageContext = createContext<{ lang: Language; t: Translations; setLang: (l: Language) => void }>({
+  lang: "en",
+  t: translations.en,
+  setLang: () => {},
+});
+
+const useLang = () => useContext(LanguageContext);
+
 function Paragraph() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[19.5px] not-italic relative shrink-0 text-[#a69c8a] text-[13px] tracking-[1.5px] uppercase whitespace-nowrap">{`Web development & Marketing`}</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[19.5px] not-italic relative shrink-0 text-[#a69c8a] text-[13px] tracking-[1.5px] uppercase whitespace-nowrap">{t.tagline}</p>
       </div>
     </div>
   );
 }
 
 function Heading1() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 1">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[24px] relative size-full">
         <p className="[word-break:break-word] font-['Barlow_Condensed:Bold',sans-serif] leading-[0] not-italic relative shrink-0 text-[#1a1a18] text-[67.74px] tracking-[-1.5px] w-[537px]">
-          <span className="leading-[62.321px]">{`DIGITAL PRODUCT `}</span>
-          <span className="font-['Barlow_Condensed:Bold_Italic',sans-serif] italic leading-[62.321px]">studio</span>
+          <span className="leading-[62.321px]">{t.hero_title1}</span>
+          <span className="font-['Barlow_Condensed:Bold_Italic',sans-serif] italic leading-[62.321px]">{t.hero_title2}</span>
         </p>
       </div>
     </div>
@@ -27,19 +114,21 @@ function Heading1() {
 }
 
 function ParagraphMargin() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Paragraph:margin">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[40px] pt-[32px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[28.9px] not-italic relative shrink-0 text-[17px] text-[rgba(26,26,24,0.65)] w-[500px]">Web Development and Marketing Services</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[28.9px] not-italic relative shrink-0 text-[17px] text-[rgba(26,26,24,0.65)] w-[500px]">{t.hero_subtitle}</p>
       </div>
     </div>
   );
 }
 
 function Button() {
+  const { t } = useLang();
   return (
     <div className="absolute bg-[#dbd6c3] h-[54px] left-0 rounded-[8px] top-0 w-[271.813px]" data-name="Button">
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Inter:Black',sans-serif] font-black leading-[22.5px] left-[136.01px] not-italic text-[15px] text-[rgba(26,26,24,0.66)] text-center top-[14px] tracking-[1px] uppercase whitespace-nowrap">{`Let's work together`}</p>
+      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Inter:Black',sans-serif] font-black leading-[22.5px] left-[136.01px] not-italic text-[15px] text-[rgba(26,26,24,0.66)] text-center top-[14px] tracking-[1px] uppercase whitespace-nowrap">{t.hero_cta}</p>
     </div>
   );
 }
@@ -94,10 +183,11 @@ function Container() {
 }
 
 function Paragraph1() {
+  const { t } = useLang();
   return (
     <div className="min-w-[120px] relative shrink-0" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start min-w-[inherit] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[15px] not-italic relative shrink-0 text-[#a69c8a] text-[12px] uppercase whitespace-nowrap">Certifications</p>
+        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[15px] not-italic relative shrink-0 text-[#a69c8a] text-[12px] uppercase whitespace-nowrap">{t.certifications}</p>
       </div>
     </div>
   );
@@ -347,10 +437,11 @@ function CertificationsSection() {
 }
 
 function Heading2() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 2">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Barlow_Condensed:Black',sans-serif] leading-[67.74px] not-italic relative shrink-0 text-[#1a1a18] text-[45.16px] text-center tracking-[0.5px] uppercase whitespace-nowrap">SERVICES</p>
+        <p className="[word-break:break-word] font-['Barlow_Condensed:Black',sans-serif] leading-[67.74px] not-italic relative shrink-0 text-[#1a1a18] text-[45.16px] text-center tracking-[0.5px] uppercase whitespace-nowrap">{t.services_heading}</p>
       </div>
     </div>
   );
@@ -361,20 +452,22 @@ function Container16() {
 }
 
 function Heading3() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 3">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Barlow_Condensed:ExtraBold',sans-serif] leading-[36px] not-italic relative shrink-0 text-[#1a1a18] text-[24px] text-center tracking-[0.3px] uppercase whitespace-nowrap">Web Development</p>
+        <p className="[word-break:break-word] font-['Barlow_Condensed:ExtraBold',sans-serif] leading-[36px] not-italic relative shrink-0 text-[#1a1a18] text-[24px] text-center tracking-[0.3px] uppercase whitespace-nowrap">{t.web_dev}</p>
       </div>
     </div>
   );
 }
 
 function Paragraph8() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[27.2px] not-italic relative shrink-0 text-[16px] text-[rgba(26,26,24,0.65)] text-center w-[313px]">From design handoff to deployed product. Building fast, accessible, and maintainable web experiences.</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[27.2px] not-italic relative shrink-0 text-[16px] text-[rgba(26,26,24,0.65)] text-center w-[313px]">{t.web_dev_desc}</p>
       </div>
     </div>
   );
@@ -405,20 +498,22 @@ function Container19() {
 }
 
 function Heading4() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 3">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Barlow_Condensed:ExtraBold',sans-serif] leading-[36px] not-italic relative shrink-0 text-[#1a1a18] text-[24px] text-center tracking-[0.3px] uppercase whitespace-nowrap">{`Product & UX Design`}</p>
+        <p className="[word-break:break-word] font-['Barlow_Condensed:ExtraBold',sans-serif] leading-[36px] not-italic relative shrink-0 text-[#1a1a18] text-[24px] text-center tracking-[0.3px] uppercase whitespace-nowrap">{t.product_design}</p>
       </div>
     </div>
   );
 }
 
 function Paragraph9() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[27.2px] not-italic relative shrink-0 text-[16px] text-[rgba(26,26,24,0.65)] text-center w-[313px]">Research-driven design from discovery to hi-fi prototypes. Wireframing, user flows, and pixel-perfect Figma deliverables.</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[27.2px] not-italic relative shrink-0 text-[16px] text-[rgba(26,26,24,0.65)] text-center w-[313px]">{t.product_design_desc}</p>
       </div>
     </div>
   );
@@ -449,20 +544,22 @@ function Container22() {
 }
 
 function Heading5() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 3">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Barlow_Condensed:ExtraBold',sans-serif] leading-[36px] not-italic relative shrink-0 text-[#1a1a18] text-[24px] text-center tracking-[0.3px] uppercase whitespace-nowrap">Digital Marketing</p>
+        <p className="[word-break:break-word] font-['Barlow_Condensed:ExtraBold',sans-serif] leading-[36px] not-italic relative shrink-0 text-[#1a1a18] text-[24px] text-center tracking-[0.3px] uppercase whitespace-nowrap">{t.digital_marketing}</p>
       </div>
     </div>
   );
 }
 
 function Paragraph10() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[27.2px] not-italic relative shrink-0 text-[16px] text-[rgba(26,26,24,0.65)] text-center w-[313px]">Strategic campaigns that connect brand to audience. Data-led planning, performance analytics, and creative execution.</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[27.2px] not-italic relative shrink-0 text-[16px] text-[rgba(26,26,24,0.65)] text-center w-[313px]">{t.digital_marketing_desc}</p>
       </div>
     </div>
   );
@@ -540,40 +637,44 @@ function Container25() {
 }
 
 function Button1() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center relative size-full">
-        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">Home</p>
+        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">{t.nav_home}</p>
       </div>
     </div>
   );
 }
 
 function Button2() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center relative size-full">
-        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">Services</p>
+        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">{t.nav_services}</p>
       </div>
     </div>
   );
 }
 
 function Button3() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center relative size-full">
-        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">About</p>
+        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">{t.nav_about}</p>
       </div>
     </div>
   );
 }
 
 function Button4() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center relative size-full">
-        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">Contact</p>
+        <p className="[word-break:break-word] font-['DM_Mono:Medium',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.4px] uppercase whitespace-nowrap">{t.nav_contact}</p>
       </div>
     </div>
   );
@@ -628,10 +729,11 @@ function Footer() {
 }
 
 function Paragraph12() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15px] not-italic relative shrink-0 text-[#f5f0e8] text-[13px] tracking-[1px] uppercase whitespace-nowrap">Studio</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15px] not-italic relative shrink-0 text-[#f5f0e8] text-[13px] tracking-[1px] uppercase whitespace-nowrap">{t.studio_label}</p>
       </div>
     </div>
   );
@@ -680,18 +782,19 @@ function Paragraph14() {
 }
 
 function Container28() {
+  const { t } = useLang();
   return (
     <div className="h-[577px] relative shrink-0 w-[1033px]" data-name="Container27">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
         <div className="[word-break:break-word] absolute font-['Inter:Medium',sans-serif] font-medium leading-[0] left-[3px] not-italic text-[#fafaf7] text-[0px] text-justify top-[93px] w-[1015px] whitespace-pre-wrap">
-          <p className="leading-[27.75px] mb-0 text-[24px]">{`LESISU Studio is a small creative studio that blends business thinking with intentional design. Building digital products and brand identities that are user-friendly, and visually memorable. `}</p>
+          <p className="leading-[27.75px] mb-0 text-[24px]">{t.about_text}</p>
           <p className="leading-[27.75px] mb-0 text-[24px]">​</p>
-          <p className="font-['Inter:Italic',sans-serif] font-normal italic leading-[27.75px] text-[20px]">Founded in 2026 by Liisa-Maria Eendla.</p>
+          <p className="font-['Inter:Italic',sans-serif] font-normal italic leading-[27.75px] text-[20px]">{t.about_founded}</p>
         </div>
         <Container31 />
         <Container30 />
         <Heading />
-        <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Barlow_Condensed:Black',sans-serif] leading-[39.515px] left-[268.5px] not-italic text-[#ede8df] text-[64px] text-center top-0 tracking-[0.7903px] uppercase w-[531px]">About LESISU Studio</p>
+        <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Barlow_Condensed:Black',sans-serif] leading-[39.515px] left-[268.5px] not-italic text-[#ede8df] text-[64px] text-center top-0 tracking-[0.7903px] uppercase w-[531px]">{t.about_title}</p>
         <Paragraph14 />
       </div>
     </div>
@@ -720,10 +823,11 @@ function About() {
 }
 
 function Heading6() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 2">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
-        <p className="[word-break:break-word] font-['Barlow_Condensed:Black',sans-serif] leading-[67.74px] not-italic relative shrink-0 text-[#1a1a18] text-[45.16px] text-center tracking-[0.5px] uppercase whitespace-nowrap">portfolio</p>
+        <p className="[word-break:break-word] font-['Barlow_Condensed:Black',sans-serif] leading-[67.74px] not-italic relative shrink-0 text-[#1a1a18] text-[45.16px] text-center tracking-[0.5px] uppercase whitespace-nowrap">{t.portfolio}</p>
       </div>
     </div>
   );
@@ -748,10 +852,11 @@ function Container34() {
 }
 
 function Paragraph15() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[15px] not-italic relative shrink-0 text-[14px] text-[rgba(26,26,24,0.45)] tracking-[1.5px] uppercase whitespace-nowrap">{`App dEVELOPMENT & ux design`}</p>
+        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[15px] not-italic relative shrink-0 text-[14px] text-[rgba(26,26,24,0.45)] tracking-[1.5px] uppercase whitespace-nowrap">{t.work_tag1}</p>
       </div>
     </div>
   );
@@ -806,10 +911,11 @@ function Container36() {
 }
 
 function Paragraph16() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[15px] not-italic relative shrink-0 text-[14px] text-[rgba(26,26,24,0.45)] tracking-[1.5px] uppercase whitespace-nowrap">SOCIAL MEDIA</p>
+        <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[15px] not-italic relative shrink-0 text-[14px] text-[rgba(26,26,24,0.45)] tracking-[1.5px] uppercase whitespace-nowrap">{t.work_tag2}</p>
       </div>
     </div>
   );
@@ -901,24 +1007,26 @@ function WorkSection() {
 }
 
 function Heading9() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0 w-full" data-name="Heading 2">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['Barlow_Condensed:Black',sans-serif] leading-[50.805px] not-italic relative shrink-0 text-[#1a1a18] text-[56.45px] tracking-[-0.5px] uppercase w-[501px]">{`Let's work together`}</p>
+        <p className="[word-break:break-word] font-['Barlow_Condensed:Black',sans-serif] leading-[50.805px] not-italic relative shrink-0 text-[#1a1a18] text-[56.45px] tracking-[-0.5px] uppercase w-[501px]">{t.contact_title}</p>
       </div>
     </div>
   );
 }
 
 function Paragraph17() {
+  const { t } = useLang();
   return (
     <div className="max-w-[360px] relative shrink-0 w-full" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start max-w-[inherit] relative size-full">
         <div className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[0px] text-[rgba(26,26,24,0.7)] w-[360px] whitespace-pre-wrap">
-          <p className="leading-[28.9px] mb-0 text-[#fafaf7] text-[24px]">{`Have a project in mind? I'd love to hear about it. `}</p>
+          <p className="leading-[28.9px] mb-0 text-[#fafaf7] text-[24px]">{t.contact_text1}</p>
           <p className="leading-[28.9px] mb-0 text-[17px]">​</p>
           <p className="text-[#fafaf7] text-[17px]">
-            <span className="leading-[28.9px]">{`Fill in the form or reach me directly at `}</span>
+            <span className="leading-[28.9px]">{t.contact_text2}</span>
             <span className="[word-break:break-word] font-['Inter:Medium_Italic',sans-serif] font-medium italic leading-[28.9px]">eendlaliisamaria@gmail.com</span>
           </p>
         </div>
@@ -967,10 +1075,11 @@ function Container40() {
 }
 
 function Paragraph18() {
+  const { t } = useLang();
   return (
     <div className="h-[35px] relative shrink-0 w-[500.5px]" data-name="Paragraph">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[16px] relative size-full">
-        <p className="[word-break:break-word] font-['Barlow:Regular',sans-serif] leading-[19.5px] not-italic relative shrink-0 text-[#fafaf7] text-[13px] whitespace-nowrap">Tallinn, Estonia · Available for remote projects worldwide</p>
+        <p className="[word-break:break-word] font-['Barlow:Regular',sans-serif] leading-[19.5px] not-italic relative shrink-0 text-[#fafaf7] text-[13px] whitespace-nowrap">{t.contact_location}</p>
       </div>
     </div>
   );
@@ -990,39 +1099,43 @@ function Container39() {
 }
 
 function TextInput() {
+  const { t } = useLang();
   return (
     <div className="bg-[#f3f3f0] h-[64px] relative shrink-0 w-[500.5px]" data-name="Text Input">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center px-[28px] py-[20px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#1a1a18] text-[16px] w-full">Name</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#1a1a18] text-[16px] w-full">{t.form_name}</p>
       </div>
     </div>
   );
 }
 
 function EmailInput() {
+  const { t } = useLang();
   return (
     <div className="bg-[#f3f3f0] h-[64px] relative shrink-0 w-[500.5px]" data-name="Email Input">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center px-[28px] py-[20px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#1a1a18] text-[16px] w-full">Email</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#1a1a18] text-[16px] w-full">{t.form_email}</p>
       </div>
     </div>
   );
 }
 
 function TextArea() {
+  const { t } = useLang();
   return (
     <div className="bg-[#f3f3f0] h-[208px] relative shrink-0 w-[500.5px]" data-name="Text Area">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start overflow-clip px-[28px] py-[20px] relative rounded-[inherit] size-full">
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#1a1a18] text-[16px] w-full">Type your message here</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#1a1a18] text-[16px] w-full">{t.form_message}</p>
       </div>
     </div>
   );
 }
 
 function Button5() {
+  const { t } = useLang();
   return (
     <div className="bg-[#1a1a18] content-stretch flex flex-col items-center justify-center px-[40px] py-[20px] relative rounded-[4px] shrink-0" data-name="Button">
-      <p className="[word-break:break-word] font-['Inter:Black',sans-serif] font-black leading-[22.5px] not-italic relative shrink-0 text-[#fafaf7] text-[15px] text-center tracking-[1px] uppercase whitespace-nowrap">Send message</p>
+      <p className="[word-break:break-word] font-['Inter:Black',sans-serif] font-black leading-[22.5px] not-italic relative shrink-0 text-[#fafaf7] text-[15px] text-center tracking-[1px] uppercase whitespace-nowrap">{t.form_send}</p>
     </div>
   );
 }
@@ -1111,30 +1224,33 @@ function Button6() {
 }
 
 function Button7() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">SERVICES</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.5)] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_services}</p>
       </div>
     </div>
   );
 }
 
 function Button8() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">ABOUT</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_about}</p>
       </div>
     </div>
   );
 }
 
 function Button9() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">PORTFOLIO</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_portfolio.toUpperCase()}</p>
       </div>
     </div>
   );
@@ -1145,10 +1261,11 @@ function Text() {
 }
 
 function Button10() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[#1a1a18] text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap">Contact</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[#1a1a18] text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_contact}</p>
         <Text />
       </div>
     </div>
@@ -1159,53 +1276,55 @@ function Text1() {
   return <div className="bg-[rgba(26,26,24,0.18)] h-[14px] relative shrink-0 w-px" data-name="Text" />;
 }
 
-function Button11() {
+function LangSwitcher({ onSwitch }: { onSwitch: (l: Language) => void }) {
+  const { lang } = useLang();
+  const etActive = lang === "et";
+  const enActive = lang === "en";
+
   return (
-    <div className="relative shrink-0" data-name="Button">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[2px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.35)] text-center tracking-[1.43px] uppercase whitespace-nowrap">ET</p>
+    <>
+      <button
+        onClick={() => onSwitch("et")}
+        className="relative shrink-0 cursor-pointer bg-transparent border-0 p-0"
+        data-name="Button"
+      >
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[2px] relative size-full">
+          <p
+            className={`[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap ${
+              etActive ? "text-[#1a1a18]" : "text-[rgba(26,26,24,0.35)]"
+            }`}
+          >
+            ET
+          </p>
+          {etActive && <div className="absolute bg-[#1a1a18] h-px left-0 top-[17px] w-full" />}
+        </div>
+      </button>
+      <div className="relative shrink-0" data-name="Text">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+          <p className="[word-break:break-word] font-['DM_Mono:Regular',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.25)] whitespace-nowrap">|</p>
+        </div>
       </div>
-    </div>
+      <button
+        onClick={() => onSwitch("en")}
+        className="relative shrink-0 cursor-pointer bg-transparent border-0 p-0"
+        data-name="Button"
+      >
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[2px] relative size-full">
+          <p
+            className={`[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap ${
+              enActive ? "text-[#1a1a18]" : "text-[rgba(26,26,24,0.35)]"
+            }`}
+          >
+            EN
+          </p>
+          {enActive && <div className="absolute bg-[#1a1a18] h-px left-0 top-[17px] w-full" />}
+        </div>
+      </button>
+    </>
   );
 }
 
-function Text3() {
-  return (
-    <div className="relative shrink-0" data-name="Text">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['DM_Mono:Regular',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.25)] whitespace-nowrap">|</p>
-      </div>
-    </div>
-  );
-}
-
-function Text4() {
-  return <div className="absolute bg-[#1a1a18] h-px left-0 top-[17px] w-[16.063px]" data-name="Text" />;
-}
-
-function Button12() {
-  return (
-    <div className="relative shrink-0" data-name="Button">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[2px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[#1a1a18] text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap">EN</p>
-        <Text4 />
-      </div>
-    </div>
-  );
-}
-
-function Text2() {
-  return (
-    <div className="relative shrink-0" data-name="Text">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[6px] items-center relative size-full">
-        <Text3 />
-        <Button12 />
-      </div>
-    </div>
-  );
-}
-
-function Container43() {
+function Container43({ onSwitch }: { onSwitch: (l: Language) => void }) {
   return (
     <div className="relative shrink-0" data-name="Container">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[32px] items-center relative size-full">
@@ -1214,32 +1333,31 @@ function Container43() {
         <Button9 />
         <Button10 />
         <Text1 />
-        <Button11 />
-        <Text2 />
+        <LangSwitcher onSwitch={onSwitch} />
       </div>
     </div>
   );
 }
 
-function Container42() {
+function Container42({ onSwitch }: { onSwitch: (l: Language) => void }) {
   return (
     <div className="h-[69px] max-w-[1280px] relative shrink-0 w-full" data-name="Container">
       <div className="flex flex-row items-center max-w-[inherit] size-full">
         <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between max-w-[inherit] pl-[32px] pr-[48px] relative size-full">
           <Button6 />
-          <Container43 />
+          <Container43 onSwitch={onSwitch} />
         </div>
       </div>
     </div>
   );
 }
 
-function Nav() {
+function Nav({ onSwitch }: { onSwitch: (l: Language) => void }) {
   return (
     <div className="bg-[#dbd6c3] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] h-[72px] relative shrink-0 w-[1129px]" data-name="Nav">
       <div aria-hidden className="absolute border-[rgba(26,26,24,0.08)] border-b border-solid inset-0 pointer-events-none" />
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-px relative size-full">
-        <Container42 />
+        <Container42 onSwitch={onSwitch} />
       </div>
     </div>
   );
@@ -1254,30 +1372,33 @@ function Button13() {
 }
 
 function Button14() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.5)] text-center tracking-[1.43px] uppercase whitespace-nowrap">SERVICES</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.5)] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_services}</p>
       </div>
     </div>
   );
 }
 
 function Button15() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">ABOUT</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_about}</p>
       </div>
     </div>
   );
 }
 
 function Button16() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">PORTFOLIO</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.4)] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_portfolio.toUpperCase()}</p>
       </div>
     </div>
   );
@@ -1288,10 +1409,11 @@ function Text5() {
 }
 
 function Button17() {
+  const { t } = useLang();
   return (
     <div className="relative shrink-0" data-name="Button">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[4px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[#1a1a18] text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap">Contact</p>
+        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[#1a1a18] text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap">{t.nav_contact}</p>
         <Text5 />
       </div>
     </div>
@@ -1302,53 +1424,7 @@ function Text6() {
   return <div className="bg-[rgba(26,26,24,0.18)] h-[14px] relative shrink-0 w-px" data-name="Text" />;
 }
 
-function Button18() {
-  return (
-    <div className="relative shrink-0" data-name="Button">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[2px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[11px] text-[rgba(26,26,24,0.35)] text-center tracking-[1.43px] uppercase whitespace-nowrap">ET</p>
-      </div>
-    </div>
-  );
-}
-
-function Text8() {
-  return (
-    <div className="relative shrink-0" data-name="Text">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
-        <p className="[word-break:break-word] font-['DM_Mono:Regular',sans-serif] leading-[15px] not-italic relative shrink-0 text-[10px] text-[rgba(26,26,24,0.25)] whitespace-nowrap">|</p>
-      </div>
-    </div>
-  );
-}
-
-function Text9() {
-  return <div className="absolute bg-[#1a1a18] h-px left-0 top-[17px] w-[16.063px]" data-name="Text" />;
-}
-
-function Button19() {
-  return (
-    <div className="relative shrink-0" data-name="Button">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center pb-[2px] relative size-full">
-        <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[16.5px] not-italic relative shrink-0 text-[#1a1a18] text-[11px] text-center tracking-[1.43px] uppercase whitespace-nowrap">EN</p>
-        <Text9 />
-      </div>
-    </div>
-  );
-}
-
-function Text7() {
-  return (
-    <div className="relative shrink-0" data-name="Text">
-      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[6px] items-center relative size-full">
-        <Text8 />
-        <Button19 />
-      </div>
-    </div>
-  );
-}
-
-function Container45() {
+function Container45({ onSwitch }: { onSwitch: (l: Language) => void }) {
   return (
     <div className="relative shrink-0" data-name="Container">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[32px] items-center relative size-full">
@@ -1357,43 +1433,47 @@ function Container45() {
         <Button16 />
         <Button17 />
         <Text6 />
-        <Button18 />
-        <Text7 />
+        <LangSwitcher onSwitch={onSwitch} />
       </div>
     </div>
   );
 }
 
-function Container44() {
+function Container44({ onSwitch }: { onSwitch: (l: Language) => void }) {
   return (
     <div className="h-[69px] max-w-[1280px] relative shrink-0 w-full" data-name="Container">
       <div className="flex flex-row items-center max-w-[inherit] size-full">
         <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between max-w-[inherit] pl-[32px] pr-[48px] relative size-full">
           <Button13 />
-          <Container45 />
+          <Container45 onSwitch={onSwitch} />
         </div>
       </div>
     </div>
   );
 }
 
-function Nav1() {
+function Nav1({ onSwitch }: { onSwitch: (l: Language) => void }) {
   return (
     <div className="absolute bg-[#dbd6c3] drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] h-[70px] left-0 top-0 w-[1129px]" data-name="Nav">
       <div aria-hidden className="absolute border-[rgba(26,26,24,0.08)] border-b border-solid inset-0 pointer-events-none" />
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-px relative size-full">
-        <Container44 />
+        <Container44 onSwitch={onSwitch} />
       </div>
     </div>
   );
 }
 
 export default function UserDashboard() {
+  const [lang, setLang] = useState<Language>("en");
+  const t = translations[lang];
+
   return (
-    <div className="bg-white content-stretch flex flex-col items-start relative size-full" data-name="User dashboard">
-      <Body />
-      <Nav />
-      <Nav1 />
-    </div>
+    <LanguageContext.Provider value={{ lang, t, setLang }}>
+      <div className="bg-white content-stretch flex flex-col items-start relative size-full" data-name="User dashboard">
+        <Body />
+        <Nav onSwitch={setLang} />
+        <Nav1 onSwitch={setLang} />
+      </div>
+    </LanguageContext.Provider>
   );
 }
