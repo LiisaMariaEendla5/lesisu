@@ -197,7 +197,7 @@ function Nav() {
 // ── Hero Section ───────────────────────────────────────────────────────────
 function HeroSection() {
   return (
-    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px]">
+    <section id="hero" className="w-full bg-[#a69c8a] pt-[72px]">
       <div className="bg-[#a69c8a] max-w-[1280px] mx-auto flex items-center gap-12 px-8 py-16 min-h-[630px]">
         {/* Left */}
         <div className="flex-1 max-w-[540px] flex flex-col">
