@@ -433,71 +433,6 @@ function CertModal({ src, onClose }: { src: string; onClose: () => void }) {
   );
 }
 
-// ── Certifications ─────────────────────────────────────────────────────────
-function CertificationsSection() {
-  const { t } = useT();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const [certImg, setCertImg] = useState<string | null>(null);
-
-  return (
-    <>
-      <AnimatePresence>
-        {certImg && <CertModal src={certImg} onClose={() => setCertImg(null)} />}
-      </AnimatePresence>
-
-      <section
-        ref={ref}
-        className="w-full bg-[#fafaf7] border-t-2 border-b-2 border-[rgba(26,26,24,0.08)] py-10"
-      >
-        <div className="certs-container max-w-[1280px] mx-auto px-8 flex items-stretch gap-8 flex-wrap">
-          <p
-            className="text-[#a69c8a] text-[12px] tracking-[0] uppercase min-w-[120px]"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
-          >
-            {t.certifications}
-          </p>
-
-          <motion.div
-            onClick={() => setCertImg(imgCertMeta)}
-            initial={{ opacity: 0, x: -18 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.1)" }}
-            className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 py-7 pl-7 pr-3 cursor-pointer transition-shadow"
-          >
-            <div className="bg-[#fafaf7] h-[54px] w-[60px] rounded-[4px] flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <MetaLogo />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Meta</p>
-              <p className="text-[#1a1a18] text-[16px]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Principles of UX/UI Design</p>
-              <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jan 6, 2026</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            onClick={() => setCertImg(imgCertGoogle)}
-            initial={{ opacity: 0, x: -18 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.22 }}
-            whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.1)" }}
-            className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 p-7 cursor-pointer transition-shadow"
-          >
-            <div className="bg-[#fafaf7] h-[54px] w-[54px] rounded-[6.75px] flex items-center justify-center flex-shrink-0">
-              <GoogleLogo />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Google</p>
-              <p className="text-[#1a1a18] text-[16px] whitespace-nowrap" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Foundations of User Experience (UX) Design</p>
-              <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jun 24, 2026</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </>
-  );
-}
 
 // ── Services Section ───────────────────────────────────────────────────────
 function ServicesSection() {
@@ -592,57 +527,114 @@ function Footer() {
   );
 }
 
-// ── About Section ──────────────────────────────────────────────────────────
+// ── About Section (includes certifications) ────────────────────────────────
 function AboutSection() {
   const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const certRef = useRef(null);
+  const certInView = useInView(certRef, { once: true, margin: "-60px" });
+  const [certImg, setCertImg] = useState<string | null>(null);
 
   return (
-    <section id="about" ref={ref} className="w-full bg-[#a69c8a] py-16 px-12 min-h-[573px]" style={{ scrollMarginTop: "72px" }}>
-      <div className="max-w-[1280px] mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-[#f5f0e8] text-[13px] tracking-[1px] uppercase mb-16"
-          style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
-        >
-          {t.studio_label}
-        </motion.p>
+    <>
+      <AnimatePresence>
+        {certImg && <CertModal src={certImg} onClose={() => setCertImg(null)} />}
+      </AnimatePresence>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65, delay: 0.1 }}
-          className="text-[#ede8df] text-[64px] tracking-[0.79px] uppercase text-center mb-12 leading-none"
-          style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
-        >
-          {t.about_title}
-        </motion.h2>
+      <section id="about" ref={ref} className="w-full bg-[#a69c8a] py-16 px-12" style={{ scrollMarginTop: "72px" }}>
+        <div className="max-w-[1280px] mx-auto">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5 }}
+            className="text-[#f5f0e8] text-[13px] tracking-[1px] uppercase mb-16"
+            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
+          >
+            {t.studio_label}
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65, delay: 0.25 }}
-          className="about-body-text max-w-[1015px]"
-        >
-          <p
-            className="text-[#fafaf7] text-[24px] leading-[1.15]"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, delay: 0.1 }}
+            className="text-[#ede8df] text-[64px] tracking-[0.79px] uppercase text-center mb-12 leading-none"
+            style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
           >
-            {t.about_body}
-          </p>
-          <br />
-          <p
-            className="text-[#fafaf7] text-[20px]"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontStyle: "italic" }}
+            {t.about_title}
+          </motion.h2>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, delay: 0.25 }}
+            className="about-body-text max-w-[1015px]"
           >
-            {t.about_founded}
-          </p>
-        </motion.div>
-      </div>
-    </section>
+            <p
+              className="text-[#fafaf7] text-[24px] leading-[1.15]"
+              style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+            >
+              {t.about_body}
+            </p>
+            <br />
+            <p
+              className="text-[#fafaf7] text-[20px]"
+              style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontStyle: "italic" }}
+            >
+              {t.about_founded}
+            </p>
+          </motion.div>
+
+          {/* Certifications — embedded in About on the same tan background */}
+          <div ref={certRef} className="mt-14 pt-10 border-t border-[rgba(26,26,24,0.12)]">
+            <div className="certs-container flex items-stretch gap-8 flex-wrap">
+              <p
+                className="text-[rgba(250,250,247,0.45)] text-[12px] tracking-[0] uppercase min-w-[120px] self-center"
+                style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
+              >
+                {t.certifications}
+              </p>
+
+              <motion.div
+                onClick={() => setCertImg(imgCertMeta)}
+                initial={{ opacity: 0, x: -18 }}
+                animate={certInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.18)" }}
+                className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 py-7 pl-7 pr-3 cursor-pointer transition-shadow"
+              >
+                <div className="bg-[#fafaf7] h-[54px] w-[60px] rounded-[4px] flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <MetaLogo />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Meta</p>
+                  <p className="text-[#1a1a18] text-[16px]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Principles of UX/UI Design</p>
+                  <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jan 6, 2026</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                onClick={() => setCertImg(imgCertGoogle)}
+                initial={{ opacity: 0, x: -18 }}
+                animate={certInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.22 }}
+                whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.18)" }}
+                className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 p-7 cursor-pointer transition-shadow"
+              >
+                <div className="bg-[#fafaf7] h-[54px] w-[54px] rounded-[6.75px] flex items-center justify-center flex-shrink-0">
+                  <GoogleLogo />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Google</p>
+                  <p className="text-[#1a1a18] text-[16px] whitespace-nowrap" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Foundations of User Experience (UX) Design</p>
+                  <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jun 24, 2026</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -872,9 +864,8 @@ export default function App() {
       <div className="min-h-screen bg-[#fafaf7]">
         <Nav />
         <HeroSection />
-        <CertificationsSection />
-        <ServicesSection />
         <AboutSection />
+        <ServicesSection />
         <PortfolioSection />
         <ContactSection />
         <Footer />
