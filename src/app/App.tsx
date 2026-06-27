@@ -329,43 +329,41 @@ function Nav() {
 function HeroSection() {
   const { t } = useT();
   return (
-    <section id="hero" className="w-full bg-[#a69c8a] pt-[72px]" style={{ scrollMarginTop: "72px" }}>
-      <div className="hero-inner bg-[#a69c8a] max-w-[1280px] mx-auto flex items-center gap-12 px-8 py-16 min-h-[630px]">
-        <div className="hero-text flex-1 max-w-[540px] flex flex-col">
+    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px]" style={{ scrollMarginTop: "72px" }}>
+      <div className="hero-inner max-w-[1280px] mx-auto flex items-center gap-16 px-10 py-20 min-h-[630px]">
+        <div className="hero-text flex-1 flex flex-col gap-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.65 }}
+            className="text-[#1a1a18] leading-[1.05] tracking-[-1.9px]"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(40px, 5.2vw, 67px)",
+            }}
+          >
+            {t.hero_title} {t.hero_italic}
+          </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.55 }}
-            className="text-[13px] tracking-[1.5px] uppercase mb-6"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, color: "#f5f0e8" }}
+            transition={{ delay: 0.45, duration: 0.55 }}
+            className="text-[#1a1a18] text-[20px] tracking-[1.9px] uppercase"
+            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
           >
             {t.tagline}
           </motion.p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.42, duration: 0.65 }}
-            className="text-[#1a1a18] leading-none tracking-[-1.5px] mb-8"
-            style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(44px, 5.5vw, 67.74px)",
-            }}
-          >
-            {t.hero_title}{" "}
-            <em style={{ fontStyle: "italic" }}>{t.hero_italic}</em>
-          </motion.h1>
-
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.55 }}
-            whileHover={{ backgroundColor: "#fafaf7", color: "#1a1a18" }}
+            transition={{ delay: 0.65, duration: 0.55 }}
+            whileHover={{ opacity: 0.88 }}
             whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
             onClick={() => scrollTo("contact")}
-            className="hero-cta bg-[#1a1a18] h-[54px] px-8 rounded-[8px] text-[#fafaf7] text-[15px] tracking-[1px] uppercase cursor-pointer self-start min-w-[272px]"
+            className="hero-cta bg-[#a69c8a] border border-[#dbd6c3] h-[54px] px-8 rounded-[8px] text-[#99004f] text-[15px] tracking-[1px] uppercase cursor-pointer self-start min-w-[272px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
           >
             {t.hero_cta}
@@ -376,7 +374,7 @@ function HeroSection() {
           initial={{ opacity: 0, scale: 0.93 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.75, ease: "easeOut" }}
-          className="hero-image flex-shrink-0 size-[506px] overflow-hidden"
+          className="hero-image flex-shrink-0 size-[506px] overflow-hidden rounded-[8px]"
         >
           <img src={imgLesisuStudio} alt="LESISU Studio" className="w-full h-full object-cover" />
         </motion.div>
