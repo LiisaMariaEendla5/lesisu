@@ -355,16 +355,6 @@ function HeroSection() {
             <em style={{ fontStyle: "italic" }}>{t.hero_italic}</em>
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.56, duration: 0.55 }}
-            className="text-[rgba(26,26,24,0.65)] text-[17px] leading-[1.7] mb-10 max-w-[500px]"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}
-          >
-            {t.hero_sub}
-          </motion.p>
-
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
