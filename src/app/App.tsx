@@ -3,6 +3,8 @@ import { useRef, useState, createContext, useContext } from "react";
 import imgLesisuStudio from "figma:asset/3ecb6bee002a445a06f7b073134159c613f21f7e.png";
 import imgLogo from "figma:asset/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgPortfolio from "figma:asset/89e932ef73814d628bef260faf2bbf0177efee97.png";
+import imgCertGoogle from "../assets/cert-google.png";
+import imgCertMeta from "../assets/cert-meta.png";
 import svgPaths from "../imports/UserDashboard/svg-qbu93pp18k";
 
 const translations = {
@@ -383,72 +385,117 @@ function HeroSection() {
   );
 }
 
+// ── Certificate lightbox ───────────────────────────────────────────────────
+function CertModal({ src, onClose }: { src: string; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 200,
+        background: "rgba(0,0,0,0.78)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "24px",
+      }}
+    >
+      <motion.img
+        src={src}
+        alt="Certificate"
+        initial={{ scale: 0.88, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.88, opacity: 0 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        style={{
+          maxWidth: "90vw", maxHeight: "90vh",
+          objectFit: "contain", borderRadius: 6,
+          boxShadow: "0 32px 80px rgba(0,0,0,0.55)",
+        }}
+      />
+      <button
+        onClick={onClose}
+        style={{
+          position: "fixed", top: 20, right: 20,
+          width: 44, height: 44, borderRadius: "50%",
+          background: "rgba(255,255,255,0.15)",
+          border: "1px solid rgba(255,255,255,0.25)",
+          color: "#fff", fontSize: 18, cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          backdropFilter: "blur(4px)",
+        }}
+      >
+        ✕
+      </button>
+    </motion.div>
+  );
+}
+
 // ── Certifications ─────────────────────────────────────────────────────────
 function CertificationsSection() {
   const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [certImg, setCertImg] = useState<string | null>(null);
 
   return (
-    <section
-      ref={ref}
-      className="w-full bg-[#fafaf7] border-t-2 border-b-2 border-[rgba(26,26,24,0.08)] py-10"
-    >
-      <div className="certs-container max-w-[1280px] mx-auto px-8 flex items-stretch gap-8 flex-wrap">
-        <p
-          className="text-[#a69c8a] text-[12px] tracking-[0] uppercase min-w-[120px]"
-          style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
-        >
-          {t.certifications}
-        </p>
+    <>
+      <AnimatePresence>
+        {certImg && <CertModal src={certImg} onClose={() => setCertImg(null)} />}
+      </AnimatePresence>
 
-        <motion.a
-          href="https://www.coursera.org/account/accomplishments"
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, x: -18 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.1)" }}
-          className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 py-7 pl-7 pr-3 cursor-pointer transition-shadow no-underline"
-        >
-          <div className="bg-[#fafaf7] h-[54px] w-[60px] rounded-[4px] flex items-center justify-center flex-shrink-0 overflow-hidden">
-            <MetaLogo />
-          </div>
-          <div className="flex flex-col gap-1">
-            <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Meta</p>
-            <p className="text-[#1a1a18] text-[16px]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Principles of UX/UI Design</p>
-            <div className="flex items-center gap-3 pt-0.5">
-              <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jan 6, 2026</p>
-              <span className="text-[#2e1ac6] text-[9px] tracking-[1.26px] uppercase hover:underline" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>LINK</span>
-            </div>
-          </div>
-        </motion.a>
+      <section
+        ref={ref}
+        className="w-full bg-[#fafaf7] border-t-2 border-b-2 border-[rgba(26,26,24,0.08)] py-10"
+      >
+        <div className="certs-container max-w-[1280px] mx-auto px-8 flex items-stretch gap-8 flex-wrap">
+          <p
+            className="text-[#a69c8a] text-[12px] tracking-[0] uppercase min-w-[120px]"
+            style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
+          >
+            {t.certifications}
+          </p>
 
-        <motion.a
-          href="https://www.coursera.org/account/accomplishments"
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, x: -18 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.22 }}
-          whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.1)" }}
-          className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 p-7 cursor-pointer transition-shadow no-underline"
-        >
-          <div className="bg-[#fafaf7] h-[54px] w-[54px] rounded-[6.75px] flex items-center justify-center flex-shrink-0">
-            <GoogleLogo />
-          </div>
-          <div className="flex flex-col gap-1">
-            <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Google</p>
-            <p className="text-[#1a1a18] text-[16px] whitespace-nowrap" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Foundations of User Experience (UX) Design</p>
-            <div className="flex items-center gap-3 pt-0.5">
-              <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jun 24, 2026</p>
-              <span className="text-[#2e1ac6] text-[9px] tracking-[1.26px] uppercase hover:underline" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>LINK</span>
+          <motion.div
+            onClick={() => setCertImg(imgCertMeta)}
+            initial={{ opacity: 0, x: -18 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.1)" }}
+            className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 py-7 pl-7 pr-3 cursor-pointer transition-shadow"
+          >
+            <div className="bg-[#fafaf7] h-[54px] w-[60px] rounded-[4px] flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <MetaLogo />
             </div>
-          </div>
-        </motion.a>
-      </div>
-    </section>
+            <div className="flex flex-col gap-1">
+              <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Meta</p>
+              <p className="text-[#1a1a18] text-[16px]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Principles of UX/UI Design</p>
+              <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jan 6, 2026</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            onClick={() => setCertImg(imgCertGoogle)}
+            initial={{ opacity: 0, x: -18 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.22 }}
+            whileHover={{ scale: 1.025, boxShadow: "0 6px 24px rgba(0,0,0,0.1)" }}
+            className="bg-[#ede8df] border-[3px] border-[#dbd6c3] rounded-[10px] flex items-start gap-4 p-7 cursor-pointer transition-shadow"
+          >
+            <div className="bg-[#fafaf7] h-[54px] w-[54px] rounded-[6.75px] flex items-center justify-center flex-shrink-0">
+              <GoogleLogo />
+            </div>
+            <div className="flex flex-col gap-1">
+              <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Google</p>
+              <p className="text-[#1a1a18] text-[16px] whitespace-nowrap" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Foundations of User Experience (UX) Design</p>
+              <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jun 24, 2026</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 }
 
