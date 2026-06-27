@@ -24,6 +24,9 @@ const translations = {
     svc3_desc: "Strategic campaigns that connect brand to audience. Data-led planning, performance analytics, and creative execution.",
     studio_label: "Studio",
     about_title: "About LESISU Studio",
+    about_title_a: "About ",
+    about_title_b: "LESISU Studio",
+    about_title_c: "",
     about_body: "LESISU Studio is a small creative studio that blends business thinking with intentional design. Building digital products and brand identities that are user-friendly, and visually memorable.",
     about_founded: "Founded in 2026 by Liisa-Maria Eendla.",
     portfolio: "PORTFOLIO",
@@ -63,6 +66,9 @@ const translations = {
     svc3_desc: "Strateegilised kampaaniad, mis ühendavad brändi sihtgrupiga. Andmepõhine planeerimine, tulemusanalüütika ja loominguline teostus.",
     studio_label: "Stuudio",
     about_title: "LESISU Stuudio kohta",
+    about_title_a: "",
+    about_title_b: "LESISU Stuudio",
+    about_title_c: " kohta",
     about_body: "LESISU Stuudio on väike loomestuudio, mis ühendab ärimõtlemist teadliku disainiga. Loome digitaalseid tooteid ja brändide identiteete, mis on kasutajasõbralikud ja visuaalselt meeldejäävad.",
     about_founded: "Asutatud 2026. aastal Liisa-Maria Eendla poolt.",
     portfolio: "PORTFOOLIO",
@@ -473,7 +479,7 @@ function ServicesSection() {
               className="flex flex-col items-center relative pb-8"
             >
               <p
-                className="text-[#dbd6c3] text-[96px] leading-none tracking-[-1.28px] absolute top-14 pointer-events-none select-none"
+                className="text-[#99004f] text-[96px] leading-none tracking-[-1.28px] absolute top-14 pointer-events-none select-none"
                 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
               >
                 {s.num}
@@ -559,7 +565,7 @@ function AboutSection() {
             className="text-[#ede8df] text-[64px] tracking-[0.79px] uppercase text-center mb-12 leading-none"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
           >
-            {t.about_title}
+            {t.about_title_a}<span style={{ color: "#99004f" }}>{t.about_title_b}</span>{t.about_title_c}
           </motion.h2>
 
           <motion.div
