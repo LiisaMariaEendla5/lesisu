@@ -609,7 +609,10 @@ function AboutSection() {
                 <div className="flex flex-col gap-1">
                   <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Meta</p>
                   <p className="text-[#1a1a18] text-[16px]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Principles of UX/UI Design</p>
-                  <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jan 6, 2026</p>
+                  <div className="flex items-center gap-3 pt-0.5">
+                    <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jan 6, 2026</p>
+                    <p className="text-[#2e1ac6] text-[9px] tracking-[1.26px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>LINK</p>
+                  </div>
                 </div>
               </motion.div>
 
@@ -627,7 +630,10 @@ function AboutSection() {
                 <div className="flex flex-col gap-1">
                   <p className="text-[#1a1a18] text-[15px] tracking-[1.4px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>Google</p>
                   <p className="text-[#1a1a18] text-[16px] whitespace-nowrap" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}>Foundations of User Experience (UX) Design</p>
-                  <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase pt-0.5" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jun 24, 2026</p>
+                  <div className="flex items-center gap-3 pt-0.5">
+                    <p className="text-[#1a1a18] text-[9px] tracking-[1.26px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}>Jun 24, 2026</p>
+                    <p className="text-[#2e1ac6] text-[9px] tracking-[1.26px] uppercase" style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}>LINK</p>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -864,8 +870,8 @@ export default function App() {
       <div className="min-h-screen bg-[#fafaf7]">
         <Nav />
         <HeroSection />
-        <AboutSection />
         <ServicesSection />
+        <AboutSection />
         <PortfolioSection />
         <ContactSection />
         <Footer />
