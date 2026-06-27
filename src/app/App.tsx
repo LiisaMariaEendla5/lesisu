@@ -335,9 +335,9 @@ function Nav() {
 function HeroSection() {
   const { t } = useT();
   return (
-    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px]" style={{ scrollMarginTop: "72px" }}>
-      <div className="hero-inner max-w-[1280px] mx-auto flex items-center gap-16 px-10 py-20 min-h-[630px]">
-        <div className="hero-text flex-1 flex flex-col gap-6">
+    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px] min-h-[1024px]" style={{ scrollMarginTop: "72px" }}>
+      <div className="hero-inner max-w-[1280px] mx-auto flex items-center gap-16 px-10 min-h-[952px]">
+        <div className="hero-text flex-1 flex flex-col gap-8">
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -346,7 +346,7 @@ function HeroSection() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(40px, 5.2vw, 67px)",
+              fontSize: "clamp(44px, 5.5vw, 67px)",
             }}
           >
             {t.hero_title} {t.hero_italic}
@@ -369,7 +369,7 @@ function HeroSection() {
             whileHover={{ opacity: 0.88 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollTo("contact")}
-            className="hero-cta bg-[#a69c8a] border border-[#dbd6c3] h-[54px] px-8 rounded-[8px] text-[#99004f] text-[15px] tracking-[1px] uppercase cursor-pointer self-start min-w-[272px]"
+            className="hero-cta bg-[#a69c8a] border border-[#dbd6c3] h-[69px] px-8 rounded-[10px] text-[#99004f] text-[19px] tracking-[1.3px] uppercase cursor-pointer self-start min-w-[352px]"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
           >
             {t.hero_cta}
@@ -451,13 +451,13 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="w-full bg-[#fafaf7] border-t border-[#dbd6c3] py-24" style={{ scrollMarginTop: "72px" }}>
-      <div className="max-w-[1280px] mx-auto px-8">
+    <section id="services" className="w-full bg-[#fafaf7] border-t border-[#dbd6c3] min-h-[1024px] pt-[122px] pb-16" style={{ scrollMarginTop: "72px" }}>
+      <div className="max-w-[1280px] mx-auto px-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-[#1a1a18] text-[45px] tracking-[0.5px] uppercase text-center mb-16"
+          className="text-[#1a1a18] text-[57px] tracking-[0.6px] uppercase text-center mb-12"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
         >
           {t.services}
@@ -468,7 +468,7 @@ function ServicesSection() {
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="services-grid grid grid-cols-3 gap-0"
+          className="services-grid grid grid-cols-3 gap-0 pt-12"
         >
           {services.map((s) => (
             <motion.div
@@ -479,20 +479,20 @@ function ServicesSection() {
               className="flex flex-col items-center relative pb-8"
             >
               <p
-                className="text-[#99004f] text-[96px] leading-none tracking-[-1.28px] absolute top-14 pointer-events-none select-none"
+                className="text-[#99004f] text-[122px] leading-none tracking-[-1.63px] absolute top-10 pointer-events-none select-none"
                 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
               >
                 {s.num}
               </p>
-              <div className="mt-[120px] pt-10 flex flex-col items-center gap-4 text-center relative z-10">
+              <div className="mt-[153px] pt-12 flex flex-col items-center gap-5 text-center relative z-10">
                 <h3
-                  className="text-[#1a1a18] text-[24px] tracking-[0.3px] uppercase"
+                  className="text-[#1a1a18] text-[30px] tracking-[0.38px] uppercase"
                   style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800 }}
                 >
                   {s.title}
                 </h3>
                 <p
-                  className="text-[rgba(26,26,24,0.65)] text-[16px] leading-[1.7] max-w-[313px]"
+                  className="text-[rgba(26,26,24,0.65)] text-[20px] leading-[1.7] max-w-[399px]"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 400 }}
                 >
                   {s.desc}
@@ -509,13 +509,13 @@ function ServicesSection() {
 // ── Footer ─────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="w-full bg-[#dbd6c3] border-t border-[rgba(26,26,24,0.15)] h-[80px]">
-      <div className="max-w-[1280px] mx-auto h-full flex items-center justify-between px-8 pr-12">
+    <footer className="w-full bg-[#dbd6c3] border-t border-[rgba(26,26,24,0.15)] h-[92px]">
+      <div className="max-w-[1280px] mx-auto h-full flex items-center justify-between px-10 pr-12">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           onClick={() => scrollTo("hero")}
-          className="h-[80px] w-[78px] rounded-[2px] overflow-hidden flex-shrink-0 cursor-pointer"
+          className="h-[92px] w-[90px] rounded-[2px] overflow-hidden flex-shrink-0 cursor-pointer"
         >
           <img src={imgLogo} alt="LESISU Studio" className="w-full h-full object-cover" />
         </motion.button>
@@ -546,23 +546,13 @@ function AboutSection() {
         {certImg && <CertModal src={certImg} onClose={() => setCertImg(null)} />}
       </AnimatePresence>
 
-      <section id="about" ref={ref} className="w-full bg-[#a69c8a] py-16 px-12" style={{ scrollMarginTop: "72px" }}>
+      <section id="about" ref={ref} className="w-full bg-[#a69c8a] min-h-[1024px] px-12 pt-[133px] pb-16" style={{ scrollMarginTop: "72px" }}>
         <div className="max-w-[1280px] mx-auto">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-[#f5f0e8] text-[13px] tracking-[1px] uppercase mb-16"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
-          >
-            {t.studio_label}
-          </motion.p>
-
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="text-[#ede8df] text-[64px] tracking-[0.79px] uppercase text-center mb-12 leading-none"
+            className="text-[#ede8df] text-[77px] tracking-[0.95px] uppercase text-center mb-14 leading-none"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
           >
             {t.about_title_a}<span style={{ color: "#99004f" }}>{t.about_title_b}</span>{t.about_title_c}
@@ -572,17 +562,17 @@ function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.25 }}
-            className="about-body-text max-w-[1015px]"
+            className="about-body-text max-w-[1222px]"
           >
             <p
-              className="text-[#fafaf7] text-[24px] leading-[1.15]"
+              className="text-[#fafaf7] text-[29px] leading-[1.16]"
               style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
             >
               {t.about_body}
             </p>
             <br />
             <p
-              className="text-[#fafaf7] text-[20px]"
+              className="text-[#fafaf7] text-[24px]"
               style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontStyle: "italic" }}
             >
               {t.about_founded}
@@ -660,13 +650,13 @@ function PortfolioSection() {
   ];
 
   return (
-    <section id="portfolio" ref={ref} className="w-full bg-white py-24 px-8" style={{ scrollMarginTop: "72px" }}>
+    <section id="portfolio" ref={ref} className="w-full bg-[#fafaf7] min-h-[1024px] pt-[123px] pb-16 px-10" style={{ scrollMarginTop: "72px" }}>
       <div className="max-w-[1280px] mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-[#1a1a18] text-[45px] tracking-[0.5px] uppercase text-center mb-16"
+          className="text-[#1a1a18] text-[58px] tracking-[0.64px] uppercase text-center mb-20"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
         >
           {t.portfolio}
@@ -676,16 +666,16 @@ function PortfolioSection() {
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="portfolio-cards flex gap-8 flex-wrap justify-center"
+          className="portfolio-cards flex gap-16 flex-wrap justify-center"
         >
           {projects.map((p) => (
             <motion.div
               key={p.title}
               variants={fadeUp}
               whileHover={{ y: -6 }}
-              className="flex flex-col gap-5 cursor-pointer group"
+              className="flex flex-col gap-6 cursor-pointer group"
             >
-              <div className="portfolio-img size-[334px] rounded-[8px] overflow-hidden">
+              <div className="portfolio-img size-[429px] rounded-[10px] overflow-hidden">
                 <motion.img
                   src={imgPortfolio}
                   alt={p.title}
@@ -696,13 +686,13 @@ function PortfolioSection() {
               </div>
               <div className="flex flex-col gap-1">
                 <p
-                  className="text-[rgba(26,26,24,0.45)] text-[14px] tracking-[1.5px] uppercase"
+                  className="text-[rgba(26,26,24,0.45)] text-[18px] tracking-[1.93px] uppercase"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
                 >
                   {p.category}
                 </p>
                 <p
-                  className="text-[#1a1a18] text-[22px] tracking-[0.2px] uppercase group-hover:text-[#a69c8a] transition-colors duration-200"
+                  className="text-[#1a1a18] text-[28px] tracking-[0.26px] uppercase group-hover:text-[#a69c8a] transition-colors duration-200"
                   style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800 }}
                 >
                   {p.title}
@@ -732,29 +722,29 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={ref} className="w-full bg-[#a59c8c] py-20 px-8" style={{ scrollMarginTop: "72px" }}>
-      <div className="contact-inner max-w-[1280px] mx-auto flex gap-16 items-start flex-wrap">
+    <section id="contact" ref={ref} className="w-full bg-[#a59c8c] pt-[102px] pb-0 px-10" style={{ scrollMarginTop: "72px" }}>
+      <div className="contact-inner max-w-[1280px] mx-auto flex gap-20 items-start flex-wrap">
         <motion.div
           initial={{ opacity: 0, x: -28 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="contact-col flex-1 min-w-[340px] flex flex-col gap-6 pt-2"
+          className="contact-col flex-1 min-w-[340px] flex flex-col gap-8 pt-2"
         >
           <h2
-            className="contact-heading text-[#1a1a18] text-[56px] tracking-[-0.5px] uppercase leading-none w-[501px]"
+            className="contact-heading text-[#fafaf7] text-[72px] tracking-[-0.64px] uppercase leading-none w-[639px]"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900 }}
           >
             {t.contact_title}
           </h2>
 
-          <div className="max-w-[360px]">
+          <div className="max-w-[459px]">
             <p
-              className="text-[#fafaf7] text-[24px] leading-[1.2] mb-2"
+              className="text-[#fafaf7] text-[30px] leading-[1.2] mb-2"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
               {t.contact_text1}
             </p>
-            <p className="text-[#fafaf7] text-[17px] leading-[1.7]" style={{ fontFamily: "Inter, sans-serif" }}>
+            <p className="text-[#fafaf7] text-[21px] leading-[1.7]" style={{ fontFamily: "Inter, sans-serif" }}>
               {t.contact_text2}{" "}
               <motion.a
                 href="mailto:eendlaliisamaria@gmail.com"
@@ -797,7 +787,7 @@ function ContactSection() {
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
           onSubmit={handleSubmit}
-          className="contact-col flex-1 min-w-[340px] max-w-[540px] flex flex-col gap-4"
+          className="contact-col flex-1 min-w-[340px] max-w-[638px] flex flex-col gap-5"
         >
           <motion.input
             type="text"
@@ -806,7 +796,7 @@ function ContactSection() {
             value={form.name}
             onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
             whileFocus={{ scale: 1.01 }}
-            className="bg-[#f3f3f0] h-[64px] w-full px-7 text-[#1a1a18] text-[16px] outline-none focus:ring-2 focus:ring-[#1a1a18] transition-all placeholder:text-[#1a1a18]"
+            className="bg-[#f3f3f0] h-[82px] w-full px-9 text-[#1a1a18] text-[16px] outline-none focus:ring-2 focus:ring-[#1a1a18] transition-all placeholder:text-[#1a1a18]"
             style={{ fontFamily: "Inter, sans-serif" }}
           />
           <motion.input
@@ -816,7 +806,7 @@ function ContactSection() {
             value={form.email}
             onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
             whileFocus={{ scale: 1.01 }}
-            className="bg-[#f3f3f0] h-[64px] w-full px-7 text-[#1a1a18] text-[16px] outline-none focus:ring-2 focus:ring-[#1a1a18] transition-all placeholder:text-[#1a1a18]"
+            className="bg-[#f3f3f0] h-[82px] w-full px-9 text-[#1a1a18] text-[16px] outline-none focus:ring-2 focus:ring-[#1a1a18] transition-all placeholder:text-[#1a1a18]"
             style={{ fontFamily: "Inter, sans-serif" }}
           />
           <motion.textarea
@@ -825,7 +815,7 @@ function ContactSection() {
             value={form.message}
             onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
             whileFocus={{ scale: 1.01 }}
-            className="bg-[#f3f3f0] h-[208px] w-full px-7 py-5 text-[#1a1a18] text-[16px] outline-none resize-none focus:ring-2 focus:ring-[#1a1a18] transition-all placeholder:text-[#1a1a18]"
+            className="bg-[#f3f3f0] h-[265px] w-full px-9 py-6 text-[#1a1a18] text-[16px] outline-none resize-none focus:ring-2 focus:ring-[#1a1a18] transition-all placeholder:text-[#1a1a18]"
             style={{ fontFamily: "Inter, sans-serif" }}
           />
 
