@@ -335,56 +335,56 @@ function Nav() {
 function HeroSection() {
   const { t } = useT();
   return (
-    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px] min-h-[1024px]" style={{ scrollMarginTop: "72px" }}>
-      <div className="hero-inner max-w-[1280px] mx-auto flex items-center gap-16 px-10 min-h-[952px]">
-        <div className="hero-text flex-1 flex flex-col gap-8">
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.65 }}
-            className="text-[#1a1a18] leading-[1.05] tracking-[-1.9px]"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(44px, 5.5vw, 67px)",
-            }}
-          >
-            {t.hero_title} {t.hero_italic}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.55 }}
-            className="text-[#1a1a18] text-[20px] tracking-[1.9px] uppercase"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
-          >
-            {t.tagline}
-          </motion.p>
-
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.55 }}
-            whileHover={{ opacity: 0.88 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => scrollTo("contact")}
-            className="hero-cta bg-[#a69c8a] border border-[#dbd6c3] h-[69px] px-8 rounded-[10px] text-[#99004f] text-[19px] tracking-[1.3px] uppercase cursor-pointer self-start min-w-[352px]"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
-          >
-            {t.hero_cta}
-          </motion.button>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.93 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.75, ease: "easeOut" }}
-          className="hero-image flex-shrink-0 size-[506px] overflow-hidden rounded-[8px]"
+    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px] min-h-[1024px] relative overflow-hidden" style={{ scrollMarginTop: "72px" }}>
+      {/* Centered text content */}
+      <div className="hero-inner max-w-[1280px] mx-auto flex flex-col items-center justify-center gap-8 px-10 min-h-[952px] text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.65 }}
+          className="text-[#1a1a18] leading-[1.05] tracking-[-1.9px]"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 700,
+            fontSize: "clamp(44px, 5.5vw, 67px)",
+          }}
         >
-          <img src={imgLesisuStudio} alt="LESISU Studio" className="w-full h-full object-cover" />
-        </motion.div>
+          {t.hero_title} {t.hero_italic}
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45, duration: 0.55 }}
+          className="text-[#1a1a18] text-[20px] tracking-[1.9px] uppercase"
+          style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
+        >
+          {t.tagline}
+        </motion.p>
+
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65, duration: 0.55 }}
+          whileHover={{ opacity: 0.88 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => scrollTo("contact")}
+          className="hero-cta bg-[#a69c8a] border border-[#dbd6c3] h-[69px] px-8 rounded-[10px] text-[#99004f] text-[19px] tracking-[1.3px] uppercase cursor-pointer min-w-[352px]"
+          style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
+        >
+          {t.hero_cta}
+        </motion.button>
       </div>
+
+      {/* LESISU STUDIO logo — bottom right */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.93 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.75, ease: "easeOut" }}
+        className="hero-image absolute bottom-[220px] right-[60px] w-[320px] pointer-events-none select-none"
+      >
+        <img src={imgLesisuStudio} alt="LESISU Studio" className="w-full h-auto object-contain" />
+      </motion.div>
     </section>
   );
 }
