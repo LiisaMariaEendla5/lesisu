@@ -721,14 +721,15 @@ function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    const body = new URLSearchParams();
-    body.append("name", form.name);
-    body.append("email", form.email);
-    body.append("message", form.message);
     try {
       await fetch(
         "https://script.google.com/macros/s/AKfycbznmQlnwpWaXoYaVm8VqMyy6iG-6LlcBih2jjrfblnxCbafoQcGmmqwbYHrKDhl_eZy/exec",
-        { method: "POST", mode: "no-cors", body }
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+        }
       );
     } catch {
       // network error — GAS may still have received it
