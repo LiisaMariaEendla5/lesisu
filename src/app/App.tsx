@@ -838,10 +838,10 @@ function ContactSection() {
                   type="submit"
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  whileHover={{ scale: 1.02, backgroundColor: "#2d2d2a" }}
+                  whileHover={{ opacity: 0.88 }}
                   whileTap={{ scale: 0.97 }}
-                  className="bg-[#1a1a18] text-[#fafaf7] px-10 py-5 rounded-[4px] text-[15px] tracking-[1px] uppercase cursor-pointer"
-                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
+                  className="bg-[#e8e3d9] border border-[#dbd6c3] text-[#99004f] h-[69px] w-[352px] rounded-[10px] text-[19px] tracking-[1.3px] uppercase cursor-pointer"
+                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 900, boxShadow: "0px 5px 2.5px rgba(0,0,0,0.25)" }}
                 >
                   {t.form_send}
                 </motion.button>
