@@ -1,5 +1,6 @@
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { useRef, useState, createContext, useContext } from "react";
+import { ProjectDetail, PROJECTS } from "./ProjectDetail";
 import imgLesisuStudio from "figma:asset/3ecb6bee002a445a06f7b073134159c613f21f7e.png";
 import imgLogo from "figma:asset/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgPortfolio from "figma:asset/89e932ef73814d628bef260faf2bbf0177efee97.png";
@@ -640,14 +641,14 @@ function AboutSection() {
 }
 
 // ── Portfolio Section ──────────────────────────────────────────────────────
-function PortfolioSection() {
+function PortfolioSection({ onProjectClick }: { onProjectClick: (id: string) => void }) {
   const { t } = useT();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const projects = [
-    { category: t.work1_cat, title: "RENTIIK" },
-    { category: t.work2_cat, title: "SAMM KORRAGA" },
+    { id: "rentiik", category: t.work1_cat, title: "RENTIIK" },
+    { id: "samm-korraga", category: t.work2_cat, title: "SAMM KORRAGA" },
   ];
 
   return (
@@ -674,6 +675,7 @@ function PortfolioSection() {
               key={p.title}
               variants={fadeUp}
               whileHover={{ y: -6 }}
+              onClick={() => onProjectClick(p.id)}
               className="flex flex-col gap-6 cursor-pointer group"
             >
               <div className="portfolio-img size-[429px] rounded-[10px] overflow-hidden">
@@ -859,6 +861,14 @@ function ContactSection() {
 export default function App() {
   const [lang, setLang] = useState<Lang>("ET");
   const t = translations[lang];
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+
+  const selectedProject = selectedProjectId
+    ? PROJECTS.find((p) => p.id === selectedProjectId) ?? null
+    : null;
+  const selectedIndex = selectedProjectId
+    ? PROJECTS.findIndex((p) => p.id === selectedProjectId)
+    : -1;
 
   return (
     <LangContext.Provider value={{ lang, t, setLang }}>
@@ -867,10 +877,23 @@ export default function App() {
         <HeroSection />
         <ServicesSection />
         <AboutSection />
-        <PortfolioSection />
+        <PortfolioSection onProjectClick={(id) => setSelectedProjectId(id)} />
         <ContactSection />
         <Footer />
       </div>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectDetail
+            project={selectedProject}
+            onClose={() => setSelectedProjectId(null)}
+            hasNext={selectedIndex < PROJECTS.length - 1}
+            hasPrev={selectedIndex > 0}
+            onNext={selectedIndex < PROJECTS.length - 1 ? () => setSelectedProjectId(PROJECTS[selectedIndex + 1].id) : undefined}
+            onPrev={selectedIndex > 0 ? () => setSelectedProjectId(PROJECTS[selectedIndex - 1].id) : undefined}
+          />
+        )}
+      </AnimatePresence>
     </LangContext.Provider>
   );
 }
