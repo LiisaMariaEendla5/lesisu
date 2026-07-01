@@ -716,9 +716,24 @@ function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSending(true);
+    const body = new URLSearchParams();
+    body.append("name", form.name);
+    body.append("email", form.email);
+    body.append("message", form.message);
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbznmQlnwpWaXoYaVm8VqMyy6iG-6LlcBih2jjrfblnxCbafoQcGmmqwbYHrKDhl_eZy/exec",
+        { method: "POST", mode: "no-cors", body }
+      );
+    } catch {
+      // network error — GAS may still have received it
+    }
+    setSending(false);
     setSent(true);
     setForm({ name: "", email: "", message: "" });
     setTimeout(() => setSent(false), 3500);
@@ -839,14 +854,15 @@ function ContactSection() {
                 <motion.button
                   key="send"
                   type="submit"
+                  disabled={sending}
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  whileHover={{ opacity: 0.88 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="bg-[#e8e3d9] border border-[#dbd6c3] text-[#99004f] h-[69px] w-[352px] rounded-[10px] text-[19px] tracking-[1.3px] uppercase cursor-pointer"
+                  whileHover={sending ? {} : { opacity: 0.88 }}
+                  whileTap={sending ? {} : { scale: 0.97 }}
+                  className="bg-[#e8e3d9] border border-[#dbd6c3] text-[#99004f] h-[69px] w-[352px] rounded-[10px] text-[19px] tracking-[1.3px] uppercase cursor-pointer disabled:opacity-60 disabled:cursor-wait"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 900, boxShadow: "0px 5px 2.5px rgba(0,0,0,0.25)" }}
                 >
-                  {t.form_send}
+                  {sending ? "..." : t.form_send}
                 </motion.button>
               )}
             </AnimatePresence>
