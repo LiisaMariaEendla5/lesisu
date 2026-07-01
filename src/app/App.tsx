@@ -5,6 +5,7 @@ import imgLogo from "figma:asset/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgPortfolio from "figma:asset/89e932ef73814d628bef260faf2bbf0177efee97.png";
 import imgCertGoogle from "../assets/cert-google.png";
 import imgCertMeta from "../assets/cert-meta.png";
+import imgLogoWhite from "../assets/logo_white.png";
 import svgPaths from "../imports/UserDashboard/svg-qbu93pp18k";
 
 const translations = {
@@ -383,7 +384,7 @@ function HeroSection() {
         transition={{ delay: 0.5, duration: 0.75, ease: "easeOut" }}
         className="hero-image absolute bottom-[220px] right-[60px] w-[320px] pointer-events-none select-none"
       >
-        <img src={imgLesisuStudio} alt="LESISU Studio" className="w-full h-auto object-contain" />
+        <img src={imgLogoWhite} alt="LESISU Studio" className="w-full h-auto object-contain" />
       </motion.div>
     </section>
   );
