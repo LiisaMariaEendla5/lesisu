@@ -723,7 +723,7 @@ function ContactSection() {
     setSending(true);
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbznmQlnwpWaXoYaVm8VqMyy6iG-6LlcBih2jjrfblnxCbafoQcGmmqwbYHrKDhl_eZy/exec",
+        "https://script.google.com/macros/s/AKfycbwq9bPYJTwCMYeCBxohAjSqXXDJwVZY07x-R2f4l6fw5juPDAow-4o1D55lRe_uAj2m/exec",
         {
           method: "POST",
           mode: "no-cors",
