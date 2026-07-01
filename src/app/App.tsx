@@ -371,7 +371,7 @@ function HeroSection() {
           whileTap={{ scale: 0.97 }}
           onClick={() => scrollTo("contact")}
           className="hero-cta bg-[#a69c8a] border border-[#dbd6c3] h-[69px] px-8 rounded-[10px] text-[#99004f] text-[19px] tracking-[1.3px] uppercase cursor-pointer min-w-[352px]"
-          style={{ fontFamily: "Inter, sans-serif", fontWeight: 900 }}
+          style={{ fontFamily: "Inter, sans-serif", fontWeight: 900, boxShadow: "0px 5px 2.5px rgba(0,0,0,0.25)" }}
         >
           {t.hero_cta}
         </motion.button>
@@ -857,7 +857,7 @@ function ContactSection() {
 
 // ── App ────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [lang, setLang] = useState<Lang>("EN");
+  const [lang, setLang] = useState<Lang>("ET");
   const t = translations[lang];
 
   return (
