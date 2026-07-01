@@ -723,7 +723,7 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={ref} className="w-full bg-[#a59c8c] pt-[102px] pb-0 px-10" style={{ scrollMarginTop: "72px" }}>
+    <section id="contact" ref={ref} className="w-full bg-[#a59c8c] pt-[102px] pb-20 px-10" style={{ scrollMarginTop: "72px" }}>
       <div className="contact-inner max-w-[1280px] mx-auto flex gap-20 items-start flex-wrap">
         <motion.div
           initial={{ opacity: 0, x: -28 }}
