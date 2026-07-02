@@ -5,6 +5,7 @@ import imgLogo from "../assets/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgRentiikHero from "../assets/RENTIIK_hero_pic.png";
 import imgRentiikFigma from "../assets/Lõpp versioon-2.png";
 import imgRentiikCo2 from "../assets/co_2_landingpage.png";
+import imgSkHero from "../assets/sk_hero.png";
 
 const detailLabels = {
   EN: {
@@ -88,6 +89,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     role: "Social Media Strategist & Designer",
     tools: ["Canva", "Social Media", "Project Management"],
+    heroImage: imgSkHero,
     challenge:
       "Building recognition from scratch in a saturated market, establishing a consistent voice and aesthetic that resonates authentically with the target audience.",
   },
