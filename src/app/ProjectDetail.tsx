@@ -239,6 +239,7 @@ export function ProjectDetail({
       transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
       className="fixed inset-0 z-50 overflow-y-auto bg-[#fafaf7]"
     >
+      <div style={{ zoom: 0.82 }}>
       {/* Navigation */}
       <nav className="sticky top-0 z-10 bg-[#dbd6c3] border-b border-[rgba(26,26,24,0.08)] drop-shadow-[0px_1.275px_1.913px_rgba(0,0,0,0.1)]">
         <div className="max-w-[1440px] mx-auto px-10 h-[88px] flex items-center justify-between">
@@ -484,6 +485,7 @@ export function ProjectDetail({
             />
           </button>
         </div>
+      </div>
       </div>
     </motion.div>
   );
