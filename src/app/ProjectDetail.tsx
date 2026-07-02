@@ -9,39 +9,39 @@ export interface Project {
   year: string;
   role: string;
   tools: string[];
-  brief: string;
-  challenge: string;
-  outcome: string;
+  brief?: string;
+  challenge?: string;
+  outcome?: string;
+  liveUrl?: string;
+  heroImage?: string;
+  images?: string[];
 }
 
 export const PROJECTS: Project[] = [
   {
     id: "rentiik",
     title: "RENTIIK",
-    category: "App Development & UX Design",
+    category: "Business Development & App Development / UX Design",
     year: "2025",
-    role: "UX Designer & Developer",
-    tools: ["Figma", "React", "TypeScript", "Tailwind CSS"],
+    role: "Co-Founder, UX Designer & Developer",
+    tools: ["Figma", ".NET MAUI", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://www.rentiik.com",
     brief:
-      "A rental platform designed to simplify how people find and manage short-term rentals. The goal was to create a seamless, intuitive experience for both renters and hosts.",
+      "RENTIIK is a peer-to-peer fashion rental platform based in Estonia, connecting people who want to rent clothing with those who want to earn by listing their own wardrobe items. The goal is to offer a circular-economy alternative to fast fashion and single-use consumption.",
     challenge:
-      "Designing a complex booking flow that felt effortless, while balancing the needs of two very different user groups — guests searching for spaces and hosts managing listings.",
+      "Building a two-sided marketplace where both the renter's and the lister's experience feel effortless — establishing trust between strangers, clear pricing, and a simple listing/booking flow. Alongside this, building a mobile app on .NET MAUI that runs smoothly on both Android and iOS from a single codebase.",
     outcome:
-      "Delivered a full-stack MVP with a 4.8/5 usability score in testing. The streamlined onboarding reduced drop-off by 40% compared to the previous prototype.",
+      "RENTIIK is currently in pre-launch phase: a bilingual (Estonian/English) landing page with an integrated CO₂ calculator is live at www.rentiik.com, and the waitlist is open. The mobile app design is finished in Figma, with development underway on .NET MAUI.",
   },
   {
     id: "samm-korraga",
     title: "SAMM KORRAGA",
     category: "Social Media",
-    year: "2025",
+    year: "2026",
     role: "Social Media Strategist & Designer",
-    tools: ["Adobe Photoshop", "Adobe Illustrator", "Canva", "Meta Business Suite"],
-    brief:
-      "A full social media identity and content strategy for an emerging lifestyle brand. Covering content planning, visual direction, and community growth.",
+    tools: ["Canva", "Social Media", "Project Management"],
     challenge:
-      "Building brand recognition from scratch in a saturated market, establishing a consistent voice and aesthetic that resonates authentically with the target audience.",
-    outcome:
-      "Grew the brand's Instagram following by 3x in 6 months with a 7% average engagement rate — significantly above the industry average of 1–3%.",
+      "Building recognition from scratch in a saturated market, establishing a consistent voice and aesthetic that resonates authentically with the target audience.",
   },
 ];
 
@@ -116,9 +116,13 @@ export function ProjectDetail({
           </h1>
         </div>
 
-        {/* Hero Image Placeholder */}
-        <div className="w-full aspect-[16/7] rounded-2xl border-2 border-dashed border-[#a69c8a] bg-[#ede8df] flex flex-col items-center justify-center mb-16 relative overflow-hidden">
-          <div className="text-center">
+        {/* Hero Image */}
+        {project.heroImage ? (
+          <div className="w-full aspect-[16/7] rounded-2xl overflow-hidden mb-16">
+            <img src={project.heroImage} alt={project.title} className="w-full h-full object-cover" />
+          </div>
+        ) : (
+          <div className="w-full aspect-[16/7] rounded-2xl border-2 border-dashed border-[#a69c8a] bg-[#ede8df] flex flex-col items-center justify-center mb-16 relative overflow-hidden">
             <div
               className="text-[#99004f] mb-2 tracking-[2px] uppercase"
               style={{
@@ -138,57 +142,61 @@ export function ProjectDetail({
               Add Hero Image
             </p>
           </div>
-          <div className="absolute top-5 left-5 bg-[#a69c8a] rounded px-3 py-1">
-            <span
-              className="text-[#fafaf7] tracking-[1.5px] uppercase"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "11px" }}
-            >
-              Hero Image
-            </span>
-          </div>
-        </div>
+        )}
 
         {/* Two-column: Brief + Stats */}
         <div className="grid grid-cols-3 gap-16 mb-16">
-          <div className="col-span-2">
-            <p
-              className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
-            >
-              Project Brief
-            </p>
-            <p
-              className="text-[#1a1a18] leading-relaxed mb-8"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px" }}
-            >
-              {project.brief}
-            </p>
+          <div className="col-span-2 flex flex-col gap-8">
+            {project.brief && (
+              <div>
+                <p
+                  className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
+                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
+                >
+                  Project Brief
+                </p>
+                <p
+                  className="text-[#1a1a18] leading-relaxed"
+                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px" }}
+                >
+                  {project.brief}
+                </p>
+              </div>
+            )}
 
-            <p
-              className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
-            >
-              The Challenge
-            </p>
-            <p
-              className="text-[rgba(26,26,24,0.65)] leading-relaxed mb-8"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "18px" }}
-            >
-              {project.challenge}
-            </p>
+            {project.challenge && (
+              <div>
+                <p
+                  className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
+                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
+                >
+                  The Challenge
+                </p>
+                <p
+                  className="text-[rgba(26,26,24,0.65)] leading-relaxed"
+                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "18px" }}
+                >
+                  {project.challenge}
+                </p>
+              </div>
+            )}
 
-            <p
-              className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
-            >
-              Outcome
-            </p>
-            <p
-              className="text-[rgba(26,26,24,0.65)] leading-relaxed"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "18px" }}
-            >
-              {project.outcome}
-            </p>
+            {project.outcome && (
+              <div>
+                <p
+                  className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
+                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
+                >
+                  Outcome
+                </p>
+                <p
+                  className="text-[rgba(26,26,24,0.65)] leading-relaxed"
+                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "18px" }}
+                >
+                  {project.outcome}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Stats sidebar */}
@@ -239,35 +247,49 @@ export function ProjectDetail({
                 </p>
               </div>
 
-              <div className="border-t border-[#dbd6c3] pt-6">
-                <button className="flex items-center gap-2 group cursor-pointer">
-                  <span
-                    className="text-[#1a1a18] underline underline-offset-4 decoration-[rgba(26,26,24,0.3)] group-hover:decoration-[#1a1a18] transition-all duration-200"
-                    style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px" }}
+              {project.liveUrl && (
+                <div className="border-t border-[#dbd6c3] pt-6">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 group cursor-pointer"
                   >
-                    View live project
-                  </span>
-                  <ExternalLink size={13} className="text-[rgba(26,26,24,0.5)] group-hover:text-[#1a1a18] transition-colors duration-200" />
-                </button>
-              </div>
+                    <span
+                      className="text-[#1a1a18] underline underline-offset-4 decoration-[rgba(26,26,24,0.3)] group-hover:decoration-[#1a1a18] transition-all duration-200"
+                      style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px" }}
+                    >
+                      View live project
+                    </span>
+                    <ExternalLink size={13} className="text-[rgba(26,26,24,0.5)] group-hover:text-[#1a1a18] transition-colors duration-200" />
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Image Gallery Placeholder */}
-        <div className="mb-16">
-          <p
-            className="text-[rgba(26,26,24,0.45)] tracking-[2px] uppercase mb-8"
-            style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
-          >
-            Project Gallery
-          </p>
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <ImagePlaceholder label="Full Width Screenshot" aspect="aspect-[4/3]" index={1} />
-            <ImagePlaceholder label="Detail View" aspect="aspect-[4/3]" index={2} />
+        {/* Image Gallery */}
+        {project.images && project.images.length > 0 && (
+          <div className="mb-16">
+            <p
+              className="text-[rgba(26,26,24,0.45)] tracking-[2px] uppercase mb-8"
+              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
+            >
+              Project Gallery
+            </p>
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              {project.images.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${project.title} ${i + 1}`}
+                  className="w-full rounded-xl object-cover aspect-[4/3]"
+                />
+              ))}
+            </div>
           </div>
-          <ImagePlaceholder label="Process / Behind the Scenes" aspect="aspect-[16/6]" index={3} fullWidth />
-        </div>
+        )}
 
         {/* Next / Prev Navigation */}
         <div className="border-t border-[#dbd6c3] pt-10 flex items-center justify-between">
@@ -316,49 +338,5 @@ export function ProjectDetail({
         </div>
       </div>
     </motion.div>
-  );
-}
-
-function ImagePlaceholder({
-  label,
-  aspect,
-  index,
-  fullWidth = false,
-}: {
-  label: string;
-  aspect: string;
-  index: number;
-  fullWidth?: boolean;
-}) {
-  return (
-    <div
-      className={`${aspect} rounded-xl border-2 border-dashed border-[#a69c8a] bg-[#ede8df] flex flex-col items-center justify-center relative overflow-hidden${fullWidth ? " w-full" : ""}`}
-    >
-      <div
-        className="text-[rgba(26,26,24,0.08)] select-none"
-        style={{
-          fontFamily: "'Barlow Condensed', sans-serif",
-          fontWeight: 900,
-          fontSize: "96px",
-          lineHeight: 1,
-        }}
-      >
-        {String(index).padStart(2, "0")}
-      </div>
-      <p
-        className="text-[rgba(26,26,24,0.35)] tracking-[1.5px] uppercase mt-2"
-        style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "12px" }}
-      >
-        {label}
-      </p>
-      <div className="absolute top-4 left-4 bg-[#a69c8a] rounded px-2 py-0.5">
-        <span
-          className="text-[#fafaf7] tracking-[1px] uppercase"
-          style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "10px" }}
-        >
-          Image {index}
-        </span>
-      </div>
-    </div>
   );
 }
