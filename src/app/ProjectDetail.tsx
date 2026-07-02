@@ -246,12 +246,14 @@ export function ProjectDetail({
       exit={{ opacity: 0, y: 60 }}
       transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
       className="fixed inset-0 z-50 overflow-y-auto bg-[#fafaf7]"
+      style={{ zoom: 0.8 }}
     >
-      <div style={{ zoom: 0.82 }}>
       {/* Navigation */}
       <nav className="sticky top-0 z-10 bg-[#dbd6c3] border-b border-[rgba(26,26,24,0.08)] drop-shadow-[0px_1.275px_1.913px_rgba(0,0,0,0.1)]">
         <div className="max-w-[1440px] mx-auto px-10 h-[88px] flex items-center justify-between">
-          <img src={imgLogo} alt="LESISU Studio" className="h-[70px] w-auto object-contain cursor-pointer" onClick={onClose} />
+          <button onClick={onClose} className="cursor-pointer flex-shrink-0 border-none bg-transparent p-0">
+            <img src={imgLogo} alt="LESISU Studio" className="h-[70px] w-auto object-contain" />
+          </button>
           <button onClick={onClose} className="flex items-center gap-3 cursor-pointer group">
             <ArrowLeft
               size={18}
@@ -493,7 +495,6 @@ export function ProjectDetail({
             />
           </button>
         </div>
-      </div>
       </div>
     </motion.div>
   );
