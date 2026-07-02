@@ -893,7 +893,7 @@ export default function App() {
 
   return (
     <LangContext.Provider value={{ lang, t, setLang }}>
-      <div className="min-h-screen bg-[#fafaf7]">
+      <div className="min-h-screen bg-[#fafaf7]" style={{ zoom: 0.8 }}>
         <Nav />
         <HeroSection />
         <ServicesSection />
