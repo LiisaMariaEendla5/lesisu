@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { ArrowLeft, ExternalLink, ArrowRight, X, ZoomIn, ZoomOut } from "lucide-react";
 import imgLogo from "../assets/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
-import imgRentiikHero from "../assets/rentiik_uxui_design.png";
+import imgRentiikHero from "../assets/hero_rentiik.png";
 import imgRentiikFigma from "../assets/Lõpp versioon-2.png";
 import imgRentiikCo2 from "../assets/co_2_landingpage.png";
 import imgSkHero from "../assets/sk_hero.png";
