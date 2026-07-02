@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, ExternalLink, ArrowRight, X, ZoomIn, ZoomOut } from "lucide-react";
 import imgLogo from "../assets/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgRentiikHero from "../assets/RENTIIK_hero_pic.png";
@@ -226,6 +226,14 @@ export function ProjectDetail({
   hasPrev,
 }: ProjectDetailProps) {
   const L = detailLabels[lang];
+
+  useEffect(() => {
+    window.history.pushState({ projectOpen: true }, "");
+    const handlePop = () => onClose();
+    window.addEventListener("popstate", handlePop);
+    return () => window.removeEventListener("popstate", handlePop);
+  }, []);
+
   const brief = (lang === "ET" && project.brief_et) ? project.brief_et : project.brief;
   const challenge = (lang === "ET" && project.challenge_et) ? project.challenge_et : project.challenge;
   const outcome = (lang === "ET" && project.outcome_et) ? project.outcome_et : project.outcome;
@@ -243,7 +251,7 @@ export function ProjectDetail({
       {/* Navigation */}
       <nav className="sticky top-0 z-10 bg-[#dbd6c3] border-b border-[rgba(26,26,24,0.08)] drop-shadow-[0px_1.275px_1.913px_rgba(0,0,0,0.1)]">
         <div className="max-w-[1440px] mx-auto px-10 h-[88px] flex items-center justify-between">
-          <img src={imgLogo} alt="LESISU Studio" className="h-[70px] w-auto object-contain" />
+          <img src={imgLogo} alt="LESISU Studio" className="h-[70px] w-auto object-contain cursor-pointer" onClick={onClose} />
           <button onClick={onClose} className="flex items-center gap-3 cursor-pointer group">
             <ArrowLeft
               size={18}
