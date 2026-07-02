@@ -47,8 +47,11 @@ export interface Project {
   role: string;
   tools: string[];
   brief?: string;
+  brief_et?: string;
   challenge?: string;
+  challenge_et?: string;
   outcome?: string;
+  outcome_et?: string;
   liveUrl?: string;
   heroImage?: string;
   images?: string[];
@@ -67,10 +70,16 @@ export const PROJECTS: Project[] = [
     images: [imgRentiikFigma, imgRentiikCo2],
     brief:
       "RENTIIK is a peer-to-peer fashion rental platform based in Estonia, connecting people who want to rent clothing with those who want to earn by listing their own wardrobe items. The goal is to offer a circular-economy alternative to fast fashion and single-use consumption.",
+    brief_et:
+      "RENTIIK on peer-to-peer moerendi platvorm Eestis, mis ühendab inimesi, kes soovivad riideid rentida, nendega, kes soovivad teenida oma garderoobi esemeid teistele rentides. Eesmärk on pakkuda ringmajanduslikku alternatiivi kiirmoele ja ühekordse tarbimise kultuurile.",
     challenge:
       "Building a two-sided marketplace where both the renter's and the lister's experience feel effortless — establishing trust between strangers, clear pricing, and a simple listing/booking flow. Alongside this, building a mobile app on .NET MAUI that runs smoothly on both Android and iOS from a single codebase.",
+    challenge_et:
+      "Kahesuunalise turu ehitamine, kus nii rentija kui ka pakkuja kogemus tunduks vaevatu — usalduse loomine võõraste vahel, selge hinnakujundus ja lihtne kuulutuste/broneerimise voog. Lisaks mobiilirakenduse arendamine .NET MAUI-s, mis töötab sujuvalt nii Androidil kui iOS-il ühest koodialusest.",
     outcome:
       "RENTIIK is currently in pre-launch phase: a bilingual (Estonian/English) landing page with an integrated CO₂ calculator is live at www.rentiik.com, and the waitlist is open. The mobile app design is finished in Figma, with development underway on .NET MAUI.",
+    outcome_et:
+      "RENTIIK on praegu eelkäivitusfaasis: kahekeelne (eesti/inglise) maandumisleht koos CO₂ kalkulaatoriga on live aadressil www.rentiik.com ja ootenimekiri on avatud. Mobiilirakenduse disain on Figmas valmis, arendus käib .NET MAUI-s.",
   },
   {
     id: "samm-korraga",
@@ -215,6 +224,9 @@ export function ProjectDetail({
   hasPrev,
 }: ProjectDetailProps) {
   const L = detailLabels[lang];
+  const brief = (lang === "ET" && project.brief_et) ? project.brief_et : project.brief;
+  const challenge = (lang === "ET" && project.challenge_et) ? project.challenge_et : project.challenge;
+  const outcome = (lang === "ET" && project.outcome_et) ? project.outcome_et : project.outcome;
 
   return (
     <motion.div
@@ -298,7 +310,7 @@ export function ProjectDetail({
         {/* Two-column: Brief + Stats */}
         <div className="grid grid-cols-3 gap-16 mb-16">
           <div className="col-span-2 flex flex-col gap-8">
-            {project.brief && (
+            {brief && (
               <div>
                 <p
                   className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
@@ -310,12 +322,12 @@ export function ProjectDetail({
                   className="text-[#1a1a18] leading-relaxed"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px" }}
                 >
-                  {project.brief}
+                  {brief}
                 </p>
               </div>
             )}
 
-            {project.challenge && (
+            {challenge && (
               <div>
                 <p
                   className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
@@ -327,12 +339,12 @@ export function ProjectDetail({
                   className="text-[rgba(26,26,24,0.65)] leading-relaxed"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "18px" }}
                 >
-                  {project.challenge}
+                  {challenge}
                 </p>
               </div>
             )}
 
-            {project.outcome && (
+            {outcome && (
               <div>
                 <p
                   className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
@@ -344,7 +356,7 @@ export function ProjectDetail({
                   className="text-[rgba(26,26,24,0.65)] leading-relaxed"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "18px" }}
                 >
-                  {project.outcome}
+                  {outcome}
                 </p>
               </div>
             )}
