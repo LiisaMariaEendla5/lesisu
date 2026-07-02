@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
-import { ArrowLeft, ExternalLink, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
+import { ArrowLeft, ExternalLink, ArrowRight, X, ZoomIn, ZoomOut } from "lucide-react";
 import imgLogo from "../assets/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
 import imgRentiikHero from "../assets/RENTIIK_hero_pic.png";
 import imgRentiikFigma from "../assets/Lõpp versioon-2.png";
@@ -82,6 +83,117 @@ export const PROJECTS: Project[] = [
       "Building recognition from scratch in a saturated market, establishing a consistent voice and aesthetic that resonates authentically with the target audience.",
   },
 ];
+
+function ImageGallery({ images, title, galleryLabel }: { images: string[]; title: string; galleryLabel: string }) {
+  const [lightbox, setLightbox] = useState<string | null>(null);
+  const [zoom, setZoom] = useState(1);
+
+  const openLightbox = (src: string) => { setLightbox(src); setZoom(1); };
+  const closeLightbox = () => { setLightbox(null); setZoom(1); };
+
+  const handleWheel = (e: WheelEvent) => {
+    e.preventDefault();
+    setZoom((z: number) => Math.min(4, Math.max(0.5, z - e.deltaY * 0.001)));
+  };
+
+  return (
+    <>
+      <div className="mb-16">
+        <p
+          className="text-[rgba(26,26,24,0.45)] tracking-[2px] uppercase mb-8"
+          style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
+        >
+          {galleryLabel}
+        </p>
+        <div className="grid grid-cols-2 gap-6">
+          {images.map((src, i) => (
+            <div
+              key={i}
+              onClick={() => openLightbox(src)}
+              className="cursor-zoom-in rounded-xl overflow-hidden bg-[#ede8df] flex items-center justify-center group relative"
+            >
+              <img
+                src={src}
+                alt={`${title} ${i + 1}`}
+                className="w-full h-full object-contain max-h-[420px]"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200 flex items-center justify-center">
+                <ZoomIn size={28} className="text-white opacity-0 group-hover:opacity-80 transition-opacity duration-200 drop-shadow" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={closeLightbox}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-6"
+            style={{ background: "rgba(0,0,0,0.88)" }}
+          >
+            <motion.img
+              src={lightbox}
+              alt="Full size"
+              initial={{ scale: 0.88, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.88, opacity: 0 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              onClick={(e: { stopPropagation: () => void }) => e.stopPropagation()}
+              onWheel={handleWheel}
+              style={{
+                transform: `scale(${zoom})`,
+                transformOrigin: "center",
+                maxWidth: "90vw",
+                maxHeight: "90vh",
+                objectFit: "contain",
+                borderRadius: 8,
+                cursor: zoom > 1 ? "zoom-out" : "default",
+                transition: "transform 0.1s ease",
+                boxShadow: "0 32px 80px rgba(0,0,0,0.55)",
+              }}
+            />
+
+            {/* Close */}
+            <button
+              onClick={closeLightbox}
+              className="fixed top-5 right-5 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer"
+              style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", backdropFilter: "blur(4px)" }}
+            >
+              <X size={18} color="white" />
+            </button>
+
+            {/* Zoom controls */}
+            <div
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 px-4 py-2 rounded-full"
+              style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)" }}
+            >
+              <button
+                onClick={(e: { stopPropagation: () => void }) => { e.stopPropagation(); setZoom((z: number) => Math.max(0.5, z - 0.25)); }}
+                className="cursor-pointer"
+              >
+                <ZoomOut size={18} color="white" />
+              </button>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.8)", minWidth: 36, textAlign: "center" }}>
+                {Math.round(zoom * 100)}%
+              </span>
+              <button
+                onClick={(e: { stopPropagation: () => void }) => { e.stopPropagation(); setZoom((z: number) => Math.min(4, z + 0.25)); }}
+                className="cursor-pointer"
+              >
+                <ZoomIn size={18} color="white" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
 
 interface ProjectDetailProps {
   project: Project;
@@ -310,24 +422,7 @@ export function ProjectDetail({
 
         {/* Image Gallery */}
         {project.images && project.images.length > 0 && (
-          <div className="mb-16">
-            <p
-              className="text-[rgba(26,26,24,0.45)] tracking-[2px] uppercase mb-8"
-              style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
-            >
-              {L.gallery}
-            </p>
-            <div className="grid grid-cols-2 gap-6">
-              {project.images.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${project.title} ${i + 1}`}
-                  className="w-full rounded-xl object-cover aspect-[4/3]"
-                />
-              ))}
-            </div>
-          </div>
+          <ImageGallery images={project.images} title={project.title} galleryLabel={L.gallery} />
         )}
 
         {/* Next / Prev Navigation */}
