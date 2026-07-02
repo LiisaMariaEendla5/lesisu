@@ -337,7 +337,7 @@ function Nav() {
 function HeroSection() {
   const { t } = useT();
   return (
-    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px] min-h-[1024px] relative overflow-hidden" style={{ scrollMarginTop: "72px" }}>
+    <section id="hero" className="w-full bg-[#fafaf7] pt-[72px] min-h-[1000px] relative overflow-hidden" style={{ scrollMarginTop: "72px" }}>
       {/* Centered text content */}
       <div className="hero-inner max-w-[1280px] mx-auto flex flex-col items-center justify-center gap-8 px-10 min-h-[952px] text-center">
         <motion.h1
