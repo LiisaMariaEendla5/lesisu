@@ -91,7 +91,7 @@ const translations = {
     nav_contact: "KONTAKT",
     footer_home: "Avaleht",
     footer_services: "Teenused",
-    footer_about: "Meist",
+    footer_about: "Taust",
     footer_contact: "Kontakt",
   },
 };
@@ -903,6 +903,7 @@ export default function App() {
         {selectedProject && (
           <ProjectDetail
             project={selectedProject}
+            lang={lang}
             onClose={() => setSelectedProjectId(null)}
             hasNext={selectedIndex < PROJECTS.length - 1}
             hasPrev={selectedIndex > 0}

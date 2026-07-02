@@ -1,6 +1,42 @@
 import { motion } from "motion/react";
 import { ArrowLeft, ExternalLink, ArrowRight } from "lucide-react";
 import imgLogo from "../assets/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
+import imgRentiikHero from "../assets/RENTIIK_hero_pic.png";
+import imgRentiikFigma from "../assets/Lõpp versioon-2.png";
+import imgRentiikCo2 from "../assets/co_2_landingpage.png";
+
+const detailLabels = {
+  EN: {
+    back: "Back to Portfolio",
+    brief: "Project Brief",
+    challenge: "The Challenge",
+    outcome: "Outcome",
+    year: "Year",
+    role: "Role",
+    tools: "Tools & Tech",
+    viewLive: "View live project",
+    allProjects: "All Projects",
+    prevProject: "Previous Project",
+    nextProject: "Next Project",
+    gallery: "Project Gallery",
+    addHeroImage: "Add Hero Image",
+  },
+  ET: {
+    back: "Tagasi portfooliosse",
+    brief: "Projekti kirjeldus",
+    challenge: "Väljakutse",
+    outcome: "Tulemus",
+    year: "Aasta",
+    role: "Roll",
+    tools: "Tööriistad",
+    viewLive: "Vaata projekti",
+    allProjects: "Kõik projektid",
+    prevProject: "Eelmine projekt",
+    nextProject: "Järgmine projekt",
+    gallery: "Projekti galerii",
+    addHeroImage: "Lisa hero pilt",
+  },
+};
 
 export interface Project {
   id: string;
@@ -26,6 +62,8 @@ export const PROJECTS: Project[] = [
     role: "Co-Founder, UX Designer & Developer",
     tools: ["Figma", ".NET MAUI", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://www.rentiik.com",
+    heroImage: imgRentiikHero,
+    images: [imgRentiikFigma, imgRentiikCo2],
     brief:
       "RENTIIK is a peer-to-peer fashion rental platform based in Estonia, connecting people who want to rent clothing with those who want to earn by listing their own wardrobe items. The goal is to offer a circular-economy alternative to fast fashion and single-use consumption.",
     challenge:
@@ -47,6 +85,7 @@ export const PROJECTS: Project[] = [
 
 interface ProjectDetailProps {
   project: Project;
+  lang: "EN" | "ET";
   onClose: () => void;
   onNext?: () => void;
   onPrev?: () => void;
@@ -56,12 +95,15 @@ interface ProjectDetailProps {
 
 export function ProjectDetail({
   project,
+  lang,
   onClose,
   onNext,
   onPrev,
   hasNext,
   hasPrev,
 }: ProjectDetailProps) {
+  const L = detailLabels[lang];
+
   return (
     <motion.div
       key={project.id}
@@ -75,10 +117,7 @@ export function ProjectDetail({
       <nav className="sticky top-0 z-10 bg-[#dbd6c3] border-b border-[rgba(26,26,24,0.08)] drop-shadow-[0px_1.275px_1.913px_rgba(0,0,0,0.1)]">
         <div className="max-w-[1440px] mx-auto px-10 h-[88px] flex items-center justify-between">
           <img src={imgLogo} alt="LESISU Studio" className="h-[70px] w-auto object-contain" />
-          <button
-            onClick={onClose}
-            className="flex items-center gap-3 cursor-pointer group"
-          >
+          <button onClick={onClose} className="flex items-center gap-3 cursor-pointer group">
             <ArrowLeft
               size={18}
               className="text-[#1a1a18] transition-transform duration-200 group-hover:-translate-x-1"
@@ -87,7 +126,7 @@ export function ProjectDetail({
               className="text-[#1a1a18] tracking-[1.8px] uppercase"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "14px" }}
             >
-              Back to Portfolio
+              {L.back}
             </span>
           </button>
         </div>
@@ -139,7 +178,7 @@ export function ProjectDetail({
               className="text-[rgba(26,26,24,0.4)] tracking-[2px] uppercase"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "13px" }}
             >
-              Add Hero Image
+              {L.addHeroImage}
             </p>
           </div>
         )}
@@ -153,7 +192,7 @@ export function ProjectDetail({
                   className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
                 >
-                  Project Brief
+                  {L.brief}
                 </p>
                 <p
                   className="text-[#1a1a18] leading-relaxed"
@@ -170,7 +209,7 @@ export function ProjectDetail({
                   className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
                 >
-                  The Challenge
+                  {L.challenge}
                 </p>
                 <p
                   className="text-[rgba(26,26,24,0.65)] leading-relaxed"
@@ -187,7 +226,7 @@ export function ProjectDetail({
                   className="text-[#a69c8a] tracking-[2px] uppercase mb-5"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
                 >
-                  Outcome
+                  {L.outcome}
                 </p>
                 <p
                   className="text-[rgba(26,26,24,0.65)] leading-relaxed"
@@ -207,7 +246,7 @@ export function ProjectDetail({
                   className="text-[rgba(26,26,24,0.35)] tracking-[1.5px] uppercase mb-2"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: "11px" }}
                 >
-                  Year
+                  {L.year}
                 </p>
                 <p
                   className="text-[#1a1a18]"
@@ -222,7 +261,7 @@ export function ProjectDetail({
                   className="text-[rgba(26,26,24,0.35)] tracking-[1.5px] uppercase mb-2"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: "11px" }}
                 >
-                  Role
+                  {L.role}
                 </p>
                 <p
                   className="text-[#1a1a18] leading-snug"
@@ -237,7 +276,7 @@ export function ProjectDetail({
                   className="text-[rgba(26,26,24,0.35)] tracking-[1.5px] uppercase mb-2"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: "11px" }}
                 >
-                  Tools & Tech
+                  {L.tools}
                 </p>
                 <p
                   className="text-[#1a1a18] leading-relaxed"
@@ -259,7 +298,7 @@ export function ProjectDetail({
                       className="text-[#1a1a18] underline underline-offset-4 decoration-[rgba(26,26,24,0.3)] group-hover:decoration-[#1a1a18] transition-all duration-200"
                       style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px" }}
                     >
-                      View live project
+                      {L.viewLive}
                     </span>
                     <ExternalLink size={13} className="text-[rgba(26,26,24,0.5)] group-hover:text-[#1a1a18] transition-colors duration-200" />
                   </a>
@@ -276,9 +315,9 @@ export function ProjectDetail({
               className="text-[rgba(26,26,24,0.45)] tracking-[2px] uppercase mb-8"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "13px" }}
             >
-              Project Gallery
+              {L.gallery}
             </p>
-            <div className="grid grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-2 gap-6">
               {project.images.map((src, i) => (
                 <img
                   key={i}
@@ -306,7 +345,7 @@ export function ProjectDetail({
               className="text-[#1a1a18] tracking-[1.5px] uppercase"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "13px" }}
             >
-              Previous Project
+              {L.prevProject}
             </span>
           </button>
 
@@ -315,7 +354,7 @@ export function ProjectDetail({
               className="text-[rgba(26,26,24,0.4)] tracking-[1.5px] uppercase hover:text-[#1a1a18] transition-colors duration-200"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "13px" }}
             >
-              All Projects
+              {L.allProjects}
             </span>
           </button>
 
@@ -328,7 +367,7 @@ export function ProjectDetail({
               className="text-[#1a1a18] tracking-[1.5px] uppercase"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "13px" }}
             >
-              Next Project
+              {L.nextProject}
             </span>
             <ArrowRight
               size={18}
