@@ -3,10 +3,11 @@ import { useRef, useState, createContext, useContext } from "react";
 import { ProjectDetail, PROJECTS } from "./ProjectDetail";
 import imgLesisuStudio from "figma:asset/3ecb6bee002a445a06f7b073134159c613f21f7e.png";
 import imgLogo from "figma:asset/d6a2072488dae5137762c9dbf8a71c3f144263b9.png";
-import imgPortfolio from "figma:asset/89e932ef73814d628bef260faf2bbf0177efee97.png";
 import imgCertGoogle from "../assets/cert-google.png";
 import imgCertMeta from "../assets/cert-meta.png";
 import imgLogoWhite from "../assets/logo_white.png";
+import imgRentiikLogo from "../assets/rentiik_logo.png";
+import imgSammKorragaLogo from "../assets/sammkorraga_logo.png";
 import svgPaths from "../imports/UserDashboard/svg-qbu93pp18k";
 
 const translations = {
@@ -647,8 +648,8 @@ function PortfolioSection({ onProjectClick }: { onProjectClick: (id: string) => 
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const projects = [
-    { id: "rentiik", category: t.work1_cat, title: "RENTIIK" },
-    { id: "samm-korraga", category: t.work2_cat, title: "SAMM KORRAGA" },
+    { id: "rentiik", category: t.work1_cat, title: "RENTIIK", image: imgRentiikLogo, cardBg: undefined },
+    { id: "samm-korraga", category: t.work2_cat, title: "SAMM KORRAGA", image: imgSammKorragaLogo, cardBg: "transparent" },
   ];
 
   return (
@@ -678,24 +679,27 @@ function PortfolioSection({ onProjectClick }: { onProjectClick: (id: string) => 
               onClick={() => onProjectClick(p.id)}
               className="flex flex-col gap-6 cursor-pointer group"
             >
-              <div className="portfolio-img size-[429px] rounded-[10px] overflow-hidden">
+              <div
+                className="portfolio-img size-[429px] rounded-[10px] overflow-hidden flex items-center justify-center"
+                style={{ background: p.cardBg ?? undefined }}
+              >
                 <motion.img
-                  src={imgPortfolio}
+                  src={p.image}
                   alt={p.title}
                   className="w-full h-full object-contain"
                   whileHover={{ scale: 1.06 }}
                   transition={{ duration: 0.4 }}
                 />
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 max-w-[429px]">
                 <p
-                  className="text-[rgba(26,26,24,0.45)] text-[18px] tracking-[1.93px] uppercase"
+                  className="text-[rgba(26,26,24,0.45)] text-[13px] tracking-[1.93px] uppercase leading-snug"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 700 }}
                 >
                   {p.category}
                 </p>
                 <p
-                  className="text-[#1a1a18] text-[28px] tracking-[0.26px] uppercase group-hover:text-[#a69c8a] transition-colors duration-200"
+                  className="text-[#1a1a18] text-[32px] tracking-[0.26px] uppercase group-hover:text-[#a69c8a] transition-colors duration-200 leading-tight"
                   style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800 }}
                 >
                   {p.title}
